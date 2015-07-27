@@ -12,5 +12,5 @@ for file in ru/* ; do
 	prefix=$(basename "$DIR")
 	DIR=$(dirname "$DIR")
     mkdir -p translate-progress/"$DIR"
-	ln -s "$file" translate-progress/"$DIR"/"$prefix-$(basename "$file")"
+	ln -sr "$file" translate-progress/"$DIR"/"$prefix-$(basename "$file")"
 done
