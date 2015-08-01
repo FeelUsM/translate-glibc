@@ -6,9 +6,9 @@ for file in ru/* ; do
     if [ $(grep '<h[1-9]' "$file" | wc -l) != 1 ]; then
 		NUM=$(($NUM + 1))
 		echo error\($NUM\): $file
-		continue
+		#continue
     fi
-    DIR="$(grep '<h[1-9]' "$file" | sed 's/^[^>]*>//; s/ .*$//; s/\./\//g')"
+    DIR="$(grep '<h[1-9]' "$file" | head -n 1 | sed 's/^[^>]*>//; s/ .*$//; s/\./\//g')"
 	prefix=$(basename "$DIR")
 	DIR=$(dirname "$DIR")
     mkdir -p translate-progress/"$DIR"
