@@ -76,11 +76,11 @@ Next: <a href="Unsafe-Features.html#Unsafe-Features" accesskey="n" rel="next">Un
 </div>
 <hr>
 <a name="POSIX-Safety-Concepts-1"></a>
-<h4 class="subsubsection">1.2.2.1 POSIX Safety Concepts</h4>
+<h4 class="subsubsection">1.2.2.1 Концепты безопасности POSIX</h4>
 <a name="index-POSIX-Safety-Concepts"></a>
 
-<p>This manual documents various safety properties of GNU C Library
-functions, in lines that follow their prototypes and look like:
+<p>Этот мануал документирует заличные средства безопасности функций GNU C Library, 
+на строках, которые следуют за их прототипами, и выглядят как:
 </p>
 <p>Preliminary:
 | MT-Safe 
@@ -90,68 +90,69 @@ functions, in lines that follow their prototypes and look like:
 </p>
 
 
-<p>The properties are assessed according to the criteria set forth in the
-POSIX standard for such safety contexts as Thread-, Async-Signal- and
-Async-Cancel- -Safety.  Intuitive definitions of these properties,
-attempting to capture the meaning of the standard definitions, follow.
+<p>Средства оцениваются в соответствии с набором критериев,
+<!-- assess - оценивать 
+forth - вперед, дальше -->
+перечисленных в стандарте POSIX для таких контекстов безопасности как
+ Потоко-(Thread-), Асинхронно-сигнально-(Async-Signal-) и Асинхронно-завершаемо-(Async-Cancel-) -безопасный(-Safety).  
+Далее следует интуитивные определения этих свойств,
+пытающееся передать значение стандартных определений.
 </p>
 <ul>
 <li> <a name="index-MT_002dSafe"></a>
 <a name="index-Thread_002dSafe"></a>
-<code>MT-Safe</code> or Thread-Safe functions are safe to call in the presence
-of other threads.  MT, in MT-Safe, stands for Multi Thread.
+<code>MT-Safe</code> или потоко-безопаная(Thread-Safe) функция 
+безопасна при вызове при присутствии в других потоках.  
+MT, в MT-Safe, расшифровывается как Multi Thread.
 
-<p>Being MT-Safe does not imply a function is atomic, nor that it uses any
-of the memory synchronization mechanisms POSIX exposes to users.  It is
-even possible that calling MT-Safe functions in sequence does not yield
-an MT-Safe combination.  For example, having a thread call two MT-Safe
-functions one right after the other does not guarantee behavior
-equivalent to atomic execution of a combination of both functions, since
-concurrent calls in other threads may interfere in a destructive way.
+<p>Being MT-Safe не предполагает, ни что функция является atomic, 
+ни что она использует какие-то механизмы синхронизации памяти POSIX явно для пользователя.  
+Даже возможно, что вызов MT-Safe функций в последовательности не принесет плоды MT-Safe комбинации(?).  
+К примеру, имея thread-вызов двух MT-Safe функций одну сразу за другой 
+не гарантирует поведение, эквивалентное выполнение комбинации обоих atomic функций, 
+т.к. параллельные вызовы в других потоках могут перекрываться деструктивным способом.
 </p>
-<p>Whole-program optimizations that could inline functions across library
-interfaces may expose unsafe reordering, and so performing inlining
-across the GNU C Library interface is not recommended.  The documented
-MT-Safety status is not guaranteed under whole-program optimization.
-However, functions defined in user-visible headers are designed to be
-safe for inlining.
+<p>Оптимизации всей программы, которые включают inline функции скваозь интерфейс библиотеки
+ могут создавать небезопаное переупорядочивание, 
+и поэтому использование inlining через интерфейс GNU C Library не рекомендуется.  
+Документированный статус MT-Safety не гарантиуется под оптимизацией всей программы.
+Тем не менее, функции, определены в хедерах, видимых пользователю, так, что бы быть безопасными для inlining'а.
 </p>
 
 </li><li> <a name="index-AS_002dSafe"></a>
 <a name="index-Async_002dSignal_002dSafe"></a>
-<code>AS-Safe</code> or Async-Signal-Safe functions are safe to call from
-asynchronous signal handlers.  AS, in AS-Safe, stands for Asynchronous
-Signal.
+<code>AS-Safe</code> или Асинхронно-сигнально-безопасные(Async-Signal-Safe) функции
+безопасны для вызовов из обработчиков асинхронных сигналов.  
+AS, в AS-Safe, расшифровывается Asynchronous Signal.
 
-<p>Many functions that are AS-Safe may set <code>errno</code>, or modify the
-floating-point environment, because their doing so does not make them
-unsuitable for use in signal handlers.  However, programs could
-misbehave should asynchronous signal handlers modify this thread-local
-state, and the signal handling machinery cannot be counted on to
-preserve it.  Therefore, signal handlers that call functions that may
-set <code>errno</code> or modify the floating-point environment <em>must</em>
-save their original values, and restore them before returning.
+<p>Множество функций, которые AS-Safe, могут устанавливать <code>errno</code>, 
+или изменять среду плавающей точки, 
+потому что их такое поведение(? their doing so) не делает их не подходящими для использования в обработчиках сигналов.  
+Тем не менее, программы могут плохо себя вести когда обработчики асинхронных сигналов модифицируют это локальное для потока состояние, 
+и механизм обработки сигналов не может рассчитать что бы сохранить их.  
+Следовательно, обработчики сигналов, которые вызывют функции, которые могут изменить <code>errno</code> 
+или изменить среду плавающей точки <em>обязаны</em>
+сохранять их оригинальные значение, и восстанавливать его перед завершением.
 </p>
 
 </li><li> <a name="index-AC_002dSafe"></a>
 <a name="index-Async_002dCancel_002dSafe"></a>
-<code>AC-Safe</code> or Async-Cancel-Safe functions are safe to call when
-asynchronous cancellation is enabled.  AC in AC-Safe stands for
-Asynchronous Cancellation.
+<code>AC-Safe</code> или Асинхронно-завершаемо-безопасные(Async-Cancel-Safe) функции 
+безопасны ля вызова, когда включено асинхронное завершение.  
+AC в AC-Safe расшифровывается как Asynchronous Cancellation.
 
-<p>The POSIX standard defines only three functions to be AC-Safe, namely
-<code>pthread_cancel</code>, <code>pthread_setcancelstate</code>, and
-<code>pthread_setcanceltype</code>.  At present the GNU C Library provides no
-guarantees beyond these three functions, but does document which
-functions are presently AC-Safe.  This documentation is provided for use
-by the GNU C Library developers.
+<p>Стандарт POSIX определяет только три функции, которые AC-Safe, 
+<code>pthread_cancel</code>, <code>pthread_setcancelstate</code>, и <code>pthread_setcanceltype</code>.  
+Как данность, GNU C Library не предоставляет гарантий за пределами этих трех функций, 
+но документирует, какие функции собственно AC-Safe.  
+Эта документация предоставляется для использоваия разработчиками GNU C Library.
 </p>
-<p>Just like signal handlers, cancellation cleanup routines must configure
-the floating point environment they require.  The routines cannot assume
-a floating point environment, particularly when asynchronous
-cancellation is enabled.  If the configuration of the floating point
-environment cannot be performed atomically then it is also possible that
-the environment encountered is internally inconsistent.
+<p>Только как обработчики сигналов, процедуры завершающей очистки 
+должны сконфигурировать среду плавающей точки, которая им требуется.  
+Процедуры не могут предполагать среду плавающей точки, 
+в частности, когда включено асинхронное завершение.  
+Если конфигурация среды плавающей точки не может быть сделана автоматически,
+тогда также возможно, что среда сталкивается со внутренней несовместимостью.
 </p>
 
 </li><li> <a name="index-MT_002dUnsafe"></a>
@@ -160,54 +161,53 @@ the environment encountered is internally inconsistent.
 <a name="index-Async_002dSignal_002dUnsafe"></a>
 <a name="index-AC_002dUnsafe"></a>
 <a name="index-Async_002dCancel_002dUnsafe"></a>
-<code>MT-Unsafe</code>, <code>AS-Unsafe</code>, <code>AC-Unsafe</code> functions are not
-safe to call within the safety contexts described above.  Calling them
-within such contexts invokes undefined behavior.
+<code>MT-Unsafe</code>, <code>AS-Unsafe</code>, <code>AC-Unsafe</code> функци небезопасны
+для вызовов в контекстах безопасности, описанных выше.  
+вызов их в таких контекстах вызывает  неопределенное поведение.
 
-<p>Functions not explicitly documented as safe in a safety context should
-be regarded as Unsafe.
+<p>Функции, явно не отмеченные как безопасные в контесте безопасности,
+должны рассматриваться как небезопасные.
 </p>
 
 </li><li> <a name="index-Preliminary"></a>
-<code>Preliminary</code> safety properties are documented, indicating these
-properties may <em>not</em> be counted on in future releases of
-the GNU C Library.
+<code>Preliminary</code>(предварительные) свойства безопасности документированы, 
+показывая, что эти свойства могут <em>не</em> сохраняться в будущих релизах GNU C Library.
 
-<p>Such preliminary properties are the result of an assessment of the
-properties of our current implementation, rather than of what is
-mandated and permitted by current and future standards.
+<p>Такие предварительные войства являются результатами оценки свойств 
+нашей текущей реализации, а не тем, что задекларировано и разрешено текущими или будущими стандартами.
 </p>
-<p>Although we strive to abide by the standards, in some cases our
-implementation is safe even when the standard does not demand safety,
-and in other cases our implementation does not meet the standard safety
-requirements.  The latter are most likely bugs; the former, when marked
-as <code>Preliminary</code>, should not be counted on: future standards may
-require changes that are not compatible with the additional safety
-properties afforded by the current implementation.
+<p>Также мы стараемся следовать стандартам, 
+<!-- strive - стараться
+abide - ожидать
+abide by - следовать, оставаться верным  -->
+в некоторых случаях наша реализация безопасна даже когда стандарт не требует этого,
+и в некоторых других случаях наша реализация не реализует требования безопасности стандарта.  
+Последнее в основном подобие багов; разработчик, года помечено как <code>Preliminary</code>, не должен полагаться: 
+будущие стандарты могут требовать изменение того, что не совместимо с
+дополнительными свойствами безопасности даваемую текущей реализацией.
 </p>
-<p>Furthermore, the POSIX standard does not offer a detailed definition of
-safety.  We assume that, by &ldquo;safe to call&rdquo;, POSIX means that, as long
-as the program does not invoke undefined behavior, the &ldquo;safe to call&rdquo;
-function behaves as specified, and does not cause other functions to
-deviate from their specified behavior.  We have chosen to use its loose
-definitions of safety, not because they are the best definitions to use,
-but because choosing them harmonizes this manual with POSIX.
+<p>К тому же, стандарт POSIX не дает детального описания безопасности.  
+Мы модразумеваем, что &ldquo;безопасная для вызова&rdquo; в POSIX означает что, 
+до тех пор пока не вызовет неопределенное поведение(?), 
+&ldquo;безопасная для вызова&rdquo; функция ведет себя как задано, 
+и не повлияет на другие функции, что бы они отклонились от заданного поведения.  
+Мы выбрали это loose(?...) определение безопасности, 
+не потому, что оно лучшее определение для использования,
+а чтобы гармонизировать этот мануал с POSIX.
 </p>
-<p>Please keep in mind that these are preliminary definitions and
-annotations, and certain aspects of the definitions are still under
-discussion and might be subject to clarification or change.
+<p>Пожалуйста уясните, что эти предварительные определения и аннотации, 
+и некоторые аспекты определений 
+все еще обсуждаются и могут являться объектами изменений.
 </p>
-<p>Over time, we envision evolving the preliminary safety notes into stable
-commitments, as stable as those of our interfaces.  As we do, we will
-remove the <code>Preliminary</code> keyword from safety notes.  As long as the
-keyword remains, however, they are not to be regarded as a promise of
-future behavior.
+<p>Со временем, мы предполагаем, что предварительные пометки безопасности преобразуются в стабильный выбор, 
+такой же стабильный, как наши интерфейсы.  
+Как это будет сделано, мы уберем ключевое слово <code>Preliminary</code> из пометок безопасности.  
+Пока ключевое слово остается, тем не менее, они не предполагаются как обещания будущего поведения.
 </p>
 
 </li></ul>
 
-<p>Other keywords that appear in safety notes are defined in subsequent
-sections.
+<p>Другие ключевые слова, которые встречаются в заметках безопасности определены в дальнейших разделах.
 </p>
 
 <hr>

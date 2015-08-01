@@ -85,44 +85,41 @@ Next: <a href="Berkeley-Unix.html#Berkeley-Unix" accesskey="n" rel="next">Berkel
 <a name="index-IEEE-Std-1003_002e2"></a>
 <a name="index-ISO_002fIEC-9945_002d2"></a>
 
-<p>The GNU C Library is also compatible with the ISO <em>POSIX</em> family of
-standards, known more formally as the <em>Portable Operating System
-Interface for Computer Environments</em> (ISO/IEC 9945).  They were also
-published as ANSI/IEEE Std 1003.  POSIX is derived mostly from various
-versions of the Unix operating system.
+<p>The GNU C Library также совместима с набором стандартов ISO <em>POSIX</em>,
+известного более формально как <em>Portable Operating System Interface for Computer Environments</em> (ISO/IEC 9945).  
+Они были дважды опубликованы как ANSI/IEEE Std 1003.  
+POSIX - в основном производный от различных версий операционных систем Unix.
 </p>
-<p>The library facilities specified by the POSIX standards are a superset
-of those required by ISO&nbsp;C<!-- /@w -->; POSIX specifies additional features for
-ISO&nbsp;C<!-- /@w --> functions, as well as specifying new additional functions.  In
-general, the additional requirements and functionality defined by the
-POSIX standards are aimed at providing lower-level support for a
-particular kind of operating system environment, rather than general
-programming language support which can run in many diverse operating
-system environments.
+<p>Средства библиотеки, специфицированные стандартами POSIX являются надмножеством средств, требуемых ISO&nbsp;C<!-- /@w -->; 
+POSIX определяет ополнительные возможности функций ISO&nbsp;C<!-- /@w -->, 
+а также определяет новые дополнительные функции.  
+В общем, дополнительные требования и функциональность, определяемые в стандартах POSIX
+нацелены на предоставление низкоуровневой поддержки для различных типов операционных систем, 
+а не для поддержки основного языка программирования, которая может работать на множестве разных сред операционных систем (?...).
 </p>
-<p>The GNU C Library implements all of the functions specified in
-<cite>ISO/IEC 9945-1:1996, the POSIX System Application Program
-Interface</cite>, commonly referred to as POSIX.1.  The primary extensions to
-the ISO&nbsp;C<!-- /@w --> facilities specified by this standard include file system
-interface primitives (see <a href="File-System-Interface.html#File-System-Interface">File System Interface</a>), device-specific
-terminal control functions (see <a href="Low_002dLevel-Terminal-Interface.html#Low_002dLevel-Terminal-Interface">Low-Level Terminal Interface</a>), and
-process control functions (see <a href="Processes.html#Processes">Processes</a>).
+<p>The GNU C Library реализует все функции, заданные в <cite>ISO/IEC 9945-1:1996, the POSIX System Application Program Interface</cite>, 
+также называемом POSIX.1.  
+Основные расширения средств ISO&nbsp;C<!-- /@w -->, задаваемые этим стандартом, включают 
+примитивы интерфейса файловой системы (см. <a href="File-System-Interface.html#File-System-Interface">14 Интерфейс файловой системы</a>), 
+Устройство-зависимые(device-specific) функции управления терминалом 
+(см. <a href="Low_002dLevel-Terminal-Interface.html#Low_002dLevel-Terminal-Interface">17 Низкоуровневый интерфейс терминала</a>), 
+и функции управления процессами (см. <a href="Processes.html#Processes">26 Процессы</a>).
 </p>
-<p>Some facilities from <cite>ISO/IEC 9945-2:1993, the POSIX Shell and
-Utilities standard</cite> (POSIX.2) are also implemented in the GNU C Library.
-These include utilities for dealing with regular expressions and other
-pattern matching facilities (see <a href="Pattern-Matching.html#Pattern-Matching">Pattern Matching</a>).
+<p>Некоторые средства из <cite>ISO/IEC 9945-2:1993, the POSIX Shell and Utilities standard</cite> (POSIX.2) 
+также реализованы в GNU C Library.
+Они включают утилиты для работы с регулярными выражениями 
+и другие средства сопоставления с образцом (см. <a href="Pattern-Matching.html#Pattern-Matching">10 Сопоставление с образцом</a>).
 </p>
 <table class="menu" border="0" cellspacing="0">
-<tr><td align="left" valign="top">&bull; <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts" accesskey="1">POSIX Safety Concepts</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Safety concepts from POSIX.
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Unsafe-Features.html#Unsafe-Features" accesskey="2">Unsafe Features</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Features that make functions unsafe.
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Conditionally-Safe-Features.html#Conditionally-Safe-Features" accesskey="3">Conditionally Safe Features</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Features that make functions unsafe
-                                 in the absence of workarounds.
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="Other-Safety-Remarks.html#Other-Safety-Remarks" accesskey="4">Other Safety Remarks</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Additional safety features and remarks.
-</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="POSIX-Safety-Concepts.html#POSIX-Safety-Concepts" accesskey="1">
+Концепты безопасности POSIX</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Концепты безопасности от POSIX.</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Unsafe-Features.html#Unsafe-Features" accesskey="2">
+Небезопасные возможности</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Фозможности, которые делают функции небезопасными.</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Conditionally-Safe-Features.html#Conditionally-Safe-Features" accesskey="3">
+Условно-безопасные возможности</a>:</td><td>&nbsp;&nbsp;</td>
+<td align="left" valign="top">Возможности, которые делают функции небезопасными без обходных путей.</td></tr>
+<tr><td align="left" valign="top">&bull; <a href="Other-Safety-Remarks.html#Other-Safety-Remarks" accesskey="4">
+Другие заметки о безопасности</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">Дополнительные возможности и заметки о безопасности.</td></tr>
 </table>
 
 

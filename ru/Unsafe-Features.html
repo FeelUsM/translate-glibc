@@ -76,42 +76,39 @@ Next: <a href="Conditionally-Safe-Features.html#Conditionally-Safe-Features" acc
 </div>
 <hr>
 <a name="Unsafe-Features-1"></a>
-<h4 class="subsubsection">1.2.2.2 Unsafe Features</h4>
+<h4 class="subsubsection">1.2.2.2 Небезопасные возможности</h4>
 <a name="index-Unsafe-Features"></a>
 
-<p>Functions that are unsafe to call in certain contexts are annotated with
-keywords that document their features that make them unsafe to call.
-AS-Unsafe features in this section indicate the functions are never safe
-to call when asynchronous signals are enabled.  AC-Unsafe features
-indicate they are never safe to call when asynchronous cancellation is
-enabled.  There are no MT-Unsafe marks in this section.
+<p>Функции,которые не безопасны для вызова в некотором контексте, 
+помечаются ключевыми словами, которые документируют их возможности, которые делают их небезопасными для вызова.
+AS-Unsafe возможности в этом разделе показывают функции, которые никогда не безопасны для вызова,
+когда включены асинхронные сигналы.  
+AC-Unsafe возможности показывают, которые никогда не безопасны для вызова когда включено асинхронное завершение.  
+В этом разделе нет пометки MT-Unsafe.
 </p>
 <ul>
 <li> <code>lock</code>
 <a name="index-lock"></a>
 
-<p>Functions marked with <code>lock</code> as an AS-Unsafe feature may be
-interrupted by a signal while holding a non-recursive lock.  If the
-signal handler calls another such function that takes the same lock, the
-result is a deadlock.
+<p>Функции, отмеченные <code>lock</code> как AS-Unsafe возможность, 
+могут быть прерваны сигналом пока удерживается нерекурсивная блокировка.  
+Если обработчик сигнала вызовет другую такую функцию, которая белает похожую блокировку, 
+в результате получится мертвая блокировка (deadlock).
 </p>
-<p>Functions annotated with <code>lock</code> as an AC-Unsafe feature may, if
-cancelled asynchronously, fail to release a lock that would have been
-released if their execution had not been interrupted by asynchronous
-thread cancellation.  Once a lock is left taken, attempts to take that
-lock will block indefinitely.
+<p>Функции, помеченные <code>lock</code> как AC-Unsafe возможность,
+могут, если асинхронно завершаться, не освободить блокировку, которая была бы освобождена,
+если бы ее выполнение не прерывалось асинхронным завершением потока.  
+Пока блокировка не освобождена(Once a lock is left taken), попытки взять эту блокировку будут блокироваться неопределенно(indefinitely).
 </p>
 
 </li><li> <code>corrupt</code>
 <a name="index-corrupt"></a>
 
-<p>Functions marked with <code>corrupt</code> as an AS-Unsafe feature may corrupt
-data structures and misbehave when they interrupt, or are interrupted
-by, another such function.  Unlike functions marked with <code>lock</code>,
-these take recursive locks to avoid MT-Safety problems, but this is not
-enough to stop a signal handler from observing a partially-updated data
-structure.  Further corruption may arise from the interrupted function&rsquo;s
-failure to notice updates made by signal handlers.
+<p>Функции, отмеченные <code>corrupt</code> как AS-Unsafe возможность,
+могут повредить структуры данных и неопределенно себя вести, когда прерывают или прерываются, другими такими функциями.  
+В отличие от функций, помеченных <code>lock</code>, эти используют рекурсивные блокировки для избежания броблем MT-Safety, 
+но этого не достаточно чтобы остановить обработчик сигнала из просмотра частично обновленной структуры данных.  
+Further corruption may arise from the interrupted function&rsquo;s failure to notice updates made by signal handlers.
 </p>
 <p>Functions marked with <code>corrupt</code> as an AC-Unsafe feature may leave
 data structures in a corrupt, partially updated state.  Subsequent uses
@@ -122,9 +119,9 @@ of the data structure may misbehave.
 </li><li> <code>heap</code>
 <a name="index-heap"></a>
 
-<p>Functions marked with <code>heap</code> may call heap memory management
-functions from the <code>malloc</code>/<code>free</code> family of functions and are
-only as safe as those functions.  This note is thus equivalent to:
+<p>Функции, отмеченные как <code>heap</code> согут вызывать функции управления памятью heap
+из набора функций <code>malloc</code>/<code>free</code> и и являются такими же безопачными как и этими функциями.  
+Эта пометка эквивалентна:
 </p>
 <p>| AS-Unsafe lock
 | AC-Unsafe lock fd mem
@@ -136,15 +133,14 @@ only as safe as those functions.  This note is thus equivalent to:
 </li><li> <code>dlopen</code>
 <a name="index-dlopen"></a>
 
-<p>Functions marked with <code>dlopen</code> use the dynamic loader to load
-shared libraries into the current execution image.  This involves
-opening files, mapping them into memory, allocating additional memory,
-resolving symbols, applying relocations and more, all of this while
-holding internal dynamic loader locks.
+<p>Функции, отмеченные как <code>dlopen</code>, используют динамический загрузчик 
+для загрузки динамических библиотек в текущий исполняемый образ.  
+Это включает открытие файла, расположение его в памяти, выделение дополнительной памяти,
+разрешение символов, применение релокаций и т.д., 
+все это пока удерживается внутренняя блокировка динамической загрузки.
 </p>
-<p>The locks are enough for these functions to be AS- and AC-Unsafe, but
-other issues may arise.  At present this is a placeholder for all
-potential safety issues raised by <code>dlopen</code>.
+<p>Блокировки достаточны для этих функций что бы быть AS- и AC-Unsafe, но могут возникнуть другие проблемы.  
+At present this is a placeholder for all potential safety issues raised by <code>dlopen</code>.
 </p>
 
 
