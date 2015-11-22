@@ -1,0 +1,1605 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+ <META NAME="GENERATOR" CONTENT="SGML-Tools 1.0.9">
+ <TITLE> Библиотека языка C GNU glibc: Введение</TITLE>
+ <LINK HREF="glibc-2.html" REL=next>
+
+ <LINK HREF="glibc.html#toc1" REL=contents>
+</HEAD>
+<body bgcolor="#DDE1C2">
+<LINK REL="stylesheet" href="http://www.opennet.ru/opennet4.css" type="text/css">
+<!--htdig_noindex-->
+<FORM method="get" action="http://www.opennet.ru/search.shtml">
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%">
+<TR>
+<TD VALIGN="BOTTOM" BGCOLOR="#E9EAD6" style="background: #E9EAD6 url('http://www.opennet.ru/back.gif') repeat-x bottom left">
+<A HREF="http://www.opennet.ru/"><IMG SRC="http://www.opennet.ru/opennet2.gif" HEIGHT=60 WIDTH=249 ALT="The OpenNET Project" BORDER="0"></A><br>
+</TD>
+
+<TD BGCOLOR="#B0B190" WIDTH="1"><IMG SRC="http://www.opennet.ru/p.gif" HEIGHT=1 WIDTH=1 ALT=""></TD>
+
+<TD VALIGN=TOP ALIGN=RIGHT WIDTH="470" HEIGHT="70" BGCOLOR="#D9DAC6">
+<TABLE BORDER=0 CELLPADDING=1 WIDTH="470">
+<TR>
+<TD HEIGHT=60 BGCOLOR="#D9DAC6">
+
+<script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+ style="display:inline-block;width:468px;height:60px"
+ data-ad-client="ca-pub-2075278885744463"
+ data-ad-slot="4070171090"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</TD>
+</TR>
+</TABLE>
+</TD>
+
+<TD BGCOLOR="#B0B190" WIDTH="1"><IMG SRC="http://www.opennet.ru/p.gif" HEIGHT=1 WIDTH=1 ALT=""></TD>
+<TD WIDTH="40" BGCOLOR="#E9EAD6" style="background: #E9EAD6 url('http://www.opennet.ru/back.gif') repeat-x bottom left">&nbsp;</TD>
+<TD BGCOLOR="#B0B190" WIDTH="1"><IMG SRC="http://www.opennet.ru/p.gif" HEIGHT=1 WIDTH=1 ALT=""></TD>
+
+<TD VALIGN=TOP ALIGN=RIGHT WIDTH="130" BGCOLOR="#E9EAD6" ROWSPAN=3>
+<a              
+href="http://click.opennet.ru/cgi-bin/opennet/hjump.cgi?lanbilling8" target=_blank><img              
+src="http://www.opennet.ru/img/lanbilling8.gif" width=130 height=125 border=0 alt=""></a>
+
+</TD>
+
+</TR>
+
+<TR BGCOLOR="#B0B190"><TD COLSPAN=6><IMG SRC="http://www.opennet.ru/p.gif" HEIGHT=1 WIDTH=1 ALT=""></TD></TR>
+
+
+<TR BGCOLOR="#E9EAD6">
+<TD ALIGN=CENTER COLSPAN=5>
+<table width="100%">
+<tr>
+<td rowspan=2 width=300 nowrap class="h">
+<INPUT type=hidden name=exclude value="index|/man.shtml"><A HREF="http://www.opennet.ru/search.shtml" class="h"><u>Поиск</u></A>&nbsp;(<A HREF="http://www.opennet.ru/keywords/" class="h">теги</A>):&nbsp;<INPUT type="text" size="20" name="words" value="" title='для поиска в google наберите "g фраза"'>
+</td><td width="20%">
+&nbsp;   <A HREF="http://www.opennet.ru/opennews/" class="h"><b><u>НОВОСТИ</u></b></A> (<a href="http://www.opennet.ru/news/opennet.shtml" class="h">+</a>)
+</td><td width="20%">
+  <A HREF="http://www.opennet.ru/mp/" class="h"><b><u>КОНТЕНТ</u></b></A>
+</td><td width="20%">
+  <A HREF="http://wiki.opennet.ru" class="h"><b><u>WIKI</u></b></A>
+</td><td width="20%">
+   <A HREF="http://www.opennet.ru/man.shtml" class="h"><b><u>MAN'ы</u></b></A>
+</td><td width="20%">
+   <A HREF="http://www.opennet.ru/forum/" class="h"><b><u>ФОРУМ</u></b></A>
+</td></tr>
+</table>
+</TD>
+<TD BGCOLOR="#B0B190" WIDTH="1"><IMG SRC="http://www.opennet.ru/p.gif" HEIGHT=1 WIDTH=1 ALT=""></TD>
+</TR>
+<TR BGCOLOR="#B0B190"><TD COLSPAN=7><IMG SRC="http://www.opennet.ru/p.gif" HEIGHT=2 WIDTH=1 ALT=""></TD></TR>
+</TABLE>
+
+<div style="float: left; width: 279; text-align: left;padding-right: 60px;" id=adv><A HREF="http://www.ip-as.ru" target=_blank><IMG SRC="http://www.opennet.ru/img/ipas3.gif" BORDER="0" width="279" height="40"></A></div>
+<div style="padding-top: 0px;position:absolute;left:50%;margin-left:-235px;width:470px;" id=adv2>
+<script language=JavaScript src="http://www.opennet.ru/cgi-bin/opennet/hints.cgi?itsoft"></script> 
+</div>
+<div style="width: 279;float: right;" id=adv3>
+</div>
+<div style="clear: both;"></div>
+<br>
+
+<script language="JavaScript"><!--
+d=document;a='';r=escape(d.referrer);a+=';r='+r;
+js=10; d.write('<img src="http://top.list.ru/counter'+
+'?id=77689;js='+js+a+';rand='+Math.random()+
+'" alt="" height=1 width=1>');
+if(js>11)d.write('<'+'!-- ')//--></script><noscript><img
+src="http://top.list.ru/counter?js=na;id=77689"
+height=1 width=1 alt="">
+</noscript>
+
+</FORM>
+<!--/htdig_noindex-->
+
+
+<table  BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%" style="margin-bottom: 5px;margin-top: 5px;">
+<tr><td>
+<TABLE  BORDER=0 CELLSPACING=0 CELLPADDING=4 BGCOLOR="#E9EAD6" WIDTH="100%">
+<TR BGCOLOR="#C7CBB1"><TD><FONT COLOR="#000090">
+<b><a href="http://www.opennet.ru/docs/">Каталог документации</a> / 
+<a href="http://www.opennet.ru/docs/124.shtml">Раздел "Программирование, языки"</a> /
+<a href="index.html">Оглавление документа</a>
+</b>
+</TD></TR>
+</TABLE>
+</TD></TR>
+<TR BGCOLOR="#B0B190"><TD><IMG SRC="http://www.opennet.ru/p.gif" HEIGHT=3 WIDTH=1 ALT=""></TD></TR>
+</TABLE>
+
+<A HREF="glibc-2.html">Вперед</A>
+Назад
+<A HREF="glibc.html#toc1">Содержание</A>
+<HR>
+<H2><A NAME="s1">1. Введение</A></H2>
+
+<P>
+<P>Язык С не обеспечивает никаких встроенных средств для выполнения
+таких общих операций как ввод-вывод, управление памятью, обработка
+строк, и т.п.. Вместо этого, эти средства определены в стандартной
+библиотеке, которую Вы компилируете и подключаете к вашим программам.
+<P>Библиотека GNU C, описанная в этом документе, содержит описание
+всех библиотечных функций, которые определены в соответствии c ISO C
+стандартом, учитывая дополнительные особенности, специфические для
+POSIX и других производных операционной системы UNIX, и расширений, специфичных
+для GNU-разработок.
+<P>Цель этого руководства состоит в том, чтобы сообщить Вам, как
+использовать средства GNU библиотеки. Мы упомянули, какие ее особенности принадлежат
+каким стандартам, чтобы помочь Вам разобраться с вещами, которые являются
+потенциально непереносимыми на другие системы. Но переносимость не
+является основным вопросом данного руководства.
+<P>
+<H2><A NAME="ss1.1">1.1 Начало</A>
+</H2>
+
+<P>
+<P>Это руководство написано с учетом того, что Вы по крайней мере
+немного знакомы с языком программирования C и базисными понятиями
+программирования. В частности имеется ввиду, что знакомы с ISO C (см. раздел
+1.2.1 [ISO C]), а не с "традиционными", предшествующими
+ISO C, диалектами.
+<P>The GNU C Library includes several header files, 
+each of which provides definitions and declarations for a group of related facilities; 
+this information is used by the C compiler when processing your program. 
+For example, the header file stdio.h declares facilities for performing input and output, 
+and the header file string.h declares string processing utilities. 
+The organization of this manual generally follows the same division as the header files. 
+<P>Если Вы читаете это руководство впервые, Вам следует подробно
+прочитать весь вводный материал, а остальное главы только просмотреть. В
+библиотеке GNU C имеется множество функций, и Вы не запомните, как
+использовать каждую из них. Но Вы в общих чертах ознакомитесь с видами
+средств, которые обеспечивает библиотека, поэтому когда Вы будете писать
+ваши программы, Вы сможете распознавать, когда использовать библиотечные
+функции, и где в этом руководстве Вы сможете найти более специфичную
+информацию по ним.
+<P>
+<H2><A NAME="ss1.2">1.2 Стандарты и переносимость</A>
+</H2>
+
+<P>
+<P>Этот раздел обсуждает различные стандарты и другие источники, на
+которых базируется GNU C. Эти источники включают стандарты ISO и POSIX,
+а так же реализации System V и Berkeley Unix.
+<P>Первичная цель этого руководства - сообщить Вам, как эффективно
+использовать средства библиотеки GNU. Но если Вас интересует создание
+ваших программ, совместимых с определенными стандартами, или переносимых
+на операционные системы отличные от GNU, то оно укажет Вам направление
+использования библиотеки. Этот раздел дает Вам краткий обзор выше
+перечисленных стандартов, так, чтобы Вы знали, что они представляют,
+когда они упоминаются в других частях руководства.
+<P>См. Приложение B [Обзор библиотеки], для получения алфавитного
+списка функций и других символов, обеспечиваемых библиотекой. Этот
+список указывает также, на какие стандарты опирается каждая функция или
+символ.
+<P>
+<H3>ISO C</H3>
+
+<P>
+<P>Библиотека GNU C совместима со стандартом C, принятым Американским
+Институтом Национальных Стандартов (ISO): American National Standard
+X3.159-1989_"ANSI C" and later by the International Standardization Organization (ISO): ISO/IEC 9899:1990, “Programming languages—C”. 
+We here refer to the standard as ISO C since this is the more general standard in respect of ratification. 
+Заголовочные файлы и библиотечные средства,
+которые составляют библиотеку GNU - надмножество средств, определенных в
+соответствии c ISO C стандартом.
+<!--<P>
+<H3>Библиотека GNU C</H3>
+
+<P>-->
+<P>Если Вы следуете относительно строгой приверженности к ISO C
+стандарту, Вы должны использовать опцию ` -ansi ', когда Вы компилируете
+ваши программы компилятором GNU C. Эта опция указывает, чтобы транслятор
+определил только возможности стандарта ISO из библиотечных заголовочных
+файлов, если Вы явно не попросите о дополнительных особенностях, для
+получения информации относительно того, как это сделать см. раздел 1.3.4
+[Макрокоманды установки возможностей].
+<P>Способность ограничить библиотеку, чтобы включить только
+возможности ISO C важна, потому что ISO C устанавливает ограничения,
+которым не удовлетворяют некоторые имена, определяемые библиотечной
+реализацией, т.е. GNU расширения не всегда удовлетворяют этим
+ограничениям. См. раздел 1.3.3 [Зарезервированные имена], где приводится
+более подробная информация относительно этих ограничений.
+<P>Это руководство не будет вдаваться в подробности различий между
+ISO C и более старыми диалектами. Оно поможет вам написать программы,
+чтобы работать корректно под многими диалектами С, но не более.
+
+<h3>POSIX</h3>
+<P>Библиотека GNU также совместима с семейством стандартов ISO POSIX,
+известных более формально как Переносимый Интерфейс Операционной Системы.
+They were also published as ANSI/IEEE Std 1003. 
+POSIX составлен в основном из различных версий операционной системы UNIX.
+<P>Библиотечные средства, определенные POSIX стандартами, &shy;
+являются надмножеством of those required by ISO C; POSIX определяет
+дополнительные особенности для функций ISO С, и задает определения
+новых дополнительных функций. Вообще предпочтение отдается скорее
+дополнительным требованиям и функциональным возможностям, <!--определяемым
+POSIX стандартами, -->обеспечивающим поддержку низшего уровня для
+определенной среды операционной системы, чем общей поддержке языка
+программирования, который может выполняться в многих разнообразных
+средах операционной системы.
+<P>GNU C библиотека осуществляет все функции, определенные в ISO/IEC 9945-1:1996, 
+Системе Интерфейса Прикладных программ POSIX, обычно
+упоминающемся как POSIX.1. Первичные расширения к ISO C средствам,
+определенные этими стандартными примитивами, включают интерфейс файловой системы
+(см. Главу 14 [Интерфейс файловой системы]), аппаратно-зависимые
+функции управления терминалом (см. Главу 17 [Интерфейс терминала низкого
+уровня]), и функции управления процессом (см. Главу 23 [<!--Порожденнные-->
+Процессы]).
+<P>Некоторые средства из ISO/IEC 9945-2:1993, Стандарта Оболочки и
+Утилит POSIX (POSIX.2) также представлены в библиотеке GNU. Они включают
+в себя утилиты для обработки регулярных выражений и других средств
+сопоставления с образцом (см. Главу 10 [Сопоставления с образцом]).
+<P>
+<h4 class="subsubsection">POSIX Safety Concepts</h4>
+<a name="index-POSIX-Safety-Concepts"></a>
+
+<p>This manual documents various safety properties of GNU C Library
+functions, in lines that follow their prototypes and look like:
+</p>
+<p>Preliminary:
+| MT-Safe 
+| AS-Safe 
+| AC-Safe 
+|
+</p>
+
+
+<p>The properties are assessed according to the criteria set forth in the
+POSIX standard for such safety contexts as Thread-, Async-Signal- and
+Async-Cancel- -Safety.  Intuitive definitions of these properties,
+attempting to capture the meaning of the standard definitions, follow.
+</p>
+<ul>
+<li> <a name="index-MT_002dSafe"></a>
+<a name="index-Thread_002dSafe"></a>
+<code>MT-Safe</code> or Thread-Safe functions are safe to call in the presence
+of other threads.  MT, in MT-Safe, stands for Multi Thread.
+
+<p>Being MT-Safe does not imply a function is atomic, nor that it uses any
+of the memory synchronization mechanisms POSIX exposes to users.  It is
+even possible that calling MT-Safe functions in sequence does not yield
+an MT-Safe combination.  For example, having a thread call two MT-Safe
+functions one right after the other does not guarantee behavior
+equivalent to atomic execution of a combination of both functions, since
+concurrent calls in other threads may interfere in a destructive way.
+</p>
+<p>Whole-program optimizations that could inline functions across library
+interfaces may expose unsafe reordering, and so performing inlining
+across the GNU C Library interface is not recommended.  The documented
+MT-Safety status is not guaranteed under whole-program optimization.
+However, functions defined in user-visible headers are designed to be
+safe for inlining.
+</p>
+
+</li><li> <a name="index-AS_002dSafe"></a>
+<a name="index-Async_002dSignal_002dSafe"></a>
+<code>AS-Safe</code> or Async-Signal-Safe functions are safe to call from
+asynchronous signal handlers.  AS, in AS-Safe, stands for Asynchronous
+Signal.
+
+<p>Many functions that are AS-Safe may set <code>errno</code>, or modify the
+floating-point environment, because their doing so does not make them
+unsuitable for use in signal handlers.  However, programs could
+misbehave should asynchronous signal handlers modify this thread-local
+state, and the signal handling machinery cannot be counted on to
+preserve it.  Therefore, signal handlers that call functions that may
+set <code>errno</code> or modify the floating-point environment <em>must</em>
+save their original values, and restore them before returning.
+</p>
+
+</li><li> <a name="index-AC_002dSafe"></a>
+<a name="index-Async_002dCancel_002dSafe"></a>
+<code>AC-Safe</code> or Async-Cancel-Safe functions are safe to call when
+asynchronous cancellation is enabled.  AC in AC-Safe stands for
+Asynchronous Cancellation.
+
+<p>The POSIX standard defines only three functions to be AC-Safe, namely
+<code>pthread_cancel</code>, <code>pthread_setcancelstate</code>, and
+<code>pthread_setcanceltype</code>.  At present the GNU C Library provides no
+guarantees beyond these three functions, but does document which
+functions are presently AC-Safe.  This documentation is provided for use
+by the GNU C Library developers.
+</p>
+<p>Just like signal handlers, cancellation cleanup routines must configure
+the floating point environment they require.  The routines cannot assume
+a floating point environment, particularly when asynchronous
+cancellation is enabled.  If the configuration of the floating point
+environment cannot be performed atomically then it is also possible that
+the environment encountered is internally inconsistent.
+</p>
+
+</li><li> <a name="index-MT_002dUnsafe"></a>
+<a name="index-Thread_002dUnsafe"></a>
+<a name="index-AS_002dUnsafe"></a>
+<a name="index-Async_002dSignal_002dUnsafe"></a>
+<a name="index-AC_002dUnsafe"></a>
+<a name="index-Async_002dCancel_002dUnsafe"></a>
+<code>MT-Unsafe</code>, <code>AS-Unsafe</code>, <code>AC-Unsafe</code> functions are not
+safe to call within the safety contexts described above.  Calling them
+within such contexts invokes undefined behavior.
+
+<p>Functions not explicitly documented as safe in a safety context should
+be regarded as Unsafe.
+</p>
+
+</li><li> <a name="index-Preliminary"></a>
+<code>Preliminary</code> safety properties are documented, indicating these
+properties may <em>not</em> be counted on in future releases of
+the GNU C Library.
+
+<p>Such preliminary properties are the result of an assessment of the
+properties of our current implementation, rather than of what is
+mandated and permitted by current and future standards.
+</p>
+<p>Although we strive to abide by the standards, in some cases our
+implementation is safe even when the standard does not demand safety,
+and in other cases our implementation does not meet the standard safety
+requirements.  The latter are most likely bugs; the former, when marked
+as <code>Preliminary</code>, should not be counted on: future standards may
+require changes that are not compatible with the additional safety
+properties afforded by the current implementation.
+</p>
+<p>Furthermore, the POSIX standard does not offer a detailed definition of
+safety.  We assume that, by &ldquo;safe to call&rdquo;, POSIX means that, as long
+as the program does not invoke undefined behavior, the &ldquo;safe to call&rdquo;
+function behaves as specified, and does not cause other functions to
+deviate from their specified behavior.  We have chosen to use its loose
+definitions of safety, not because they are the best definitions to use,
+but because choosing them harmonizes this manual with POSIX.
+</p>
+<p>Please keep in mind that these are preliminary definitions and
+annotations, and certain aspects of the definitions are still under
+discussion and might be subject to clarification or change.
+</p>
+<p>Over time, we envision evolving the preliminary safety notes into stable
+commitments, as stable as those of our interfaces.  As we do, we will
+remove the <code>Preliminary</code> keyword from safety notes.  As long as the
+keyword remains, however, they are not to be regarded as a promise of
+future behavior.
+</p>
+
+</li></ul>
+
+<p>Other keywords that appear in safety notes are defined in subsequent
+sections.
+</p>
+<h4 class="subsubsection">Unsafe Features</h4>
+<a name="index-Unsafe-Features"></a>
+
+<p>Functions that are unsafe to call in certain contexts are annotated with
+keywords that document their features that make them unsafe to call.
+AS-Unsafe features in this section indicate the functions are never safe
+to call when asynchronous signals are enabled.  AC-Unsafe features
+indicate they are never safe to call when asynchronous cancellation is
+enabled.  There are no MT-Unsafe marks in this section.
+</p>
+<ul>
+<li> <code>lock</code>
+<a name="index-lock"></a>
+
+<p>Functions marked with <code>lock</code> as an AS-Unsafe feature may be
+interrupted by a signal while holding a non-recursive lock.  If the
+signal handler calls another such function that takes the same lock, the
+result is a deadlock.
+</p>
+<p>Functions annotated with <code>lock</code> as an AC-Unsafe feature may, if
+cancelled asynchronously, fail to release a lock that would have been
+released if their execution had not been interrupted by asynchronous
+thread cancellation.  Once a lock is left taken, attempts to take that
+lock will block indefinitely.
+</p>
+
+</li><li> <code>corrupt</code>
+<a name="index-corrupt"></a>
+
+<p>Functions marked with <code>corrupt</code> as an AS-Unsafe feature may corrupt
+data structures and misbehave when they interrupt, or are interrupted
+by, another such function.  Unlike functions marked with <code>lock</code>,
+these take recursive locks to avoid MT-Safety problems, but this is not
+enough to stop a signal handler from observing a partially-updated data
+structure.  Further corruption may arise from the interrupted function&rsquo;s
+failure to notice updates made by signal handlers.
+</p>
+<p>Functions marked with <code>corrupt</code> as an AC-Unsafe feature may leave
+data structures in a corrupt, partially updated state.  Subsequent uses
+of the data structure may misbehave.
+</p>
+
+
+</li><li> <code>heap</code>
+<a name="index-heap"></a>
+
+<p>Functions marked with <code>heap</code> may call heap memory management
+functions from the <code>malloc</code>/<code>free</code> family of functions and are
+only as safe as those functions.  This note is thus equivalent to:
+</p>
+<p>| AS-Unsafe lock
+| AC-Unsafe lock fd mem
+|
+</p>
+
+
+
+</li><li> <code>dlopen</code>
+<a name="index-dlopen"></a>
+
+<p>Functions marked with <code>dlopen</code> use the dynamic loader to load
+shared libraries into the current execution image.  This involves
+opening files, mapping them into memory, allocating additional memory,
+resolving symbols, applying relocations and more, all of this while
+holding internal dynamic loader locks.
+</p>
+<p>The locks are enough for these functions to be AS- and AC-Unsafe, but
+other issues may arise.  At present this is a placeholder for all
+potential safety issues raised by <code>dlopen</code>.
+</p>
+
+
+</li><li> <code>plugin</code>
+<a name="index-plugin"></a>
+
+<p>Functions annotated with <code>plugin</code> may run code from plugins that
+may be external to the GNU C Library.  Such plugin functions are assumed to be
+MT-Safe, AS-Unsafe and AC-Unsafe.  Examples of such plugins are stack
+<a name="index-NSS"></a>
+unwinding libraries, name service switch (NSS) and character set
+<a name="index-iconv"></a>
+conversion (iconv) back-ends.
+</p>
+<p>Although the plugins mentioned as examples are all brought in by means
+of dlopen, the <code>plugin</code> keyword does not imply any direct
+involvement of the dynamic loader or the <code>libdl</code> interfaces, those
+are covered by <code>dlopen</code>.  For example, if one function loads a
+module and finds the addresses of some of its functions, while another
+just calls those already-resolved functions, the former will be marked
+with <code>dlopen</code>, whereas the latter will get the <code>plugin</code>.  When
+a single function takes all of these actions, then it gets both marks.
+</p>
+
+</li><li> <code>i18n</code>
+<a name="index-i18n"></a>
+
+<p>Functions marked with <code>i18n</code> may call internationalization
+functions of the <code>gettext</code> family and will be only as safe as those
+functions.  This note is thus equivalent to:
+</p>
+<p>| MT-Safe env
+| AS-Unsafe corrupt heap dlopen
+| AC-Unsafe corrupt
+|
+</p>
+
+
+
+</li><li> <code>timer</code>
+<a name="index-timer"></a>
+
+<p>Functions marked with <code>timer</code> use the <code>alarm</code> function or
+similar to set a time-out for a system call or a long-running operation.
+In a multi-threaded program, there is a risk that the time-out signal
+will be delivered to a different thread, thus failing to interrupt the
+intended thread.  Besides being MT-Unsafe, such functions are always
+AS-Unsafe, because calling them in signal handlers may interfere with
+timers set in the interrupted code, and AC-Unsafe, because there is no
+safe way to guarantee an earlier timer will be reset in case of
+asynchronous cancellation.
+</p>
+</li></ul>
+<h4 class="subsubsection">Conditionally Safe Features</h4>
+<a name="index-Conditionally-Safe-Features"></a>
+
+<p>For some features that make functions unsafe to call in certain
+contexts, there are known ways to avoid the safety problem other than
+refraining from calling the function altogether.  The keywords that
+follow refer to such features, and each of their definitions indicate
+how the whole program needs to be constrained in order to remove the
+safety problem indicated by the keyword.  Only when all the reasons that
+make a function unsafe are observed and addressed, by applying the
+documented constraints, does the function become safe to call in a
+context.
+</p>
+<ul>
+<li> <code>init</code>
+<a name="index-init"></a>
+
+<p>Functions marked with <code>init</code> as an MT-Unsafe feature perform
+MT-Unsafe initialization when they are first called.
+</p>
+<p>Calling such a function at least once in single-threaded mode removes
+this specific cause for the function to be regarded as MT-Unsafe.  If no
+other cause for that remains, the function can then be safely called
+after other threads are started.
+</p>
+<p>Functions marked with <code>init</code> as an AS- or AC-Unsafe feature use the
+internal <code>libc_once</code> machinery or similar to initialize internal
+data structures.
+</p>
+<p>If a signal handler interrupts such an initializer, and calls any
+function that also performs <code>libc_once</code> initialization, it will
+deadlock if the thread library has been loaded.
+</p>
+<p>Furthermore, if an initializer is partially complete before it is
+canceled or interrupted by a signal whose handler requires the same
+initialization, some or all of the initialization may be performed more
+than once, leaking resources or even resulting in corrupt internal data.
+</p>
+<p>Applications that need to call functions marked with <code>init</code> as an
+AS- or AC-Unsafe feature should ensure the initialization is performed
+before configuring signal handlers or enabling cancellation, so that the
+AS- and AC-Safety issues related with <code>libc_once</code> do not arise.
+</p>
+
+
+</li><li> <code>race</code>
+<a name="index-race"></a>
+
+<p>Functions annotated with <code>race</code> as an MT-Safety issue operate on
+objects in ways that may cause data races or similar forms of
+destructive interference out of concurrent execution.  In some cases,
+the objects are passed to the functions by users; in others, they are
+used by the functions to return values to users; in others, they are not
+even exposed to users.
+</p>
+<p>We consider access to objects passed as (indirect) arguments to
+functions to be data race free.  The assurance of data race free objects
+is the caller&rsquo;s responsibility.  We will not mark a function as
+MT-Unsafe or AS-Unsafe if it misbehaves when users fail to take the
+measures required by POSIX to avoid data races when dealing with such
+objects.  As a general rule, if a function is documented as reading from
+an object passed (by reference) to it, or modifying it, users ought to
+use memory synchronization primitives to avoid data races just as they
+would should they perform the accesses themselves rather than by calling
+the library function.  <code>FILE</code> streams are the exception to the
+general rule, in that POSIX mandates the library to guard against data
+races in many functions that manipulate objects of this specific opaque
+type.  We regard this as a convenience provided to users, rather than as
+a general requirement whose expectations should extend to other types.
+</p>
+<p>In order to remind users that guarding certain arguments is their
+responsibility, we will annotate functions that take objects of certain
+types as arguments.  We draw the line for objects passed by users as
+follows: objects whose types are exposed to users, and that users are
+expected to access directly, such as memory buffers, strings, and
+various user-visible <code>struct</code> types, do <em>not</em> give reason for
+functions to be annotated with <code>race</code>.  It would be noisy and
+redundant with the general requirement, and not many would be surprised
+by the library&rsquo;s lack of internal guards when accessing objects that can
+be accessed directly by users.
+</p>
+<p>As for objects that are opaque or opaque-like, in that they are to be
+manipulated only by passing them to library functions (e.g.,
+<code>FILE</code>, <code>DIR</code>, <code>obstack</code>, <code>iconv_t</code>), there might be
+additional expectations as to internal coordination of access by the
+library.  We will annotate, with <code>race</code> followed by a colon and the
+argument name, functions that take such objects but that do not take
+care of synchronizing access to them by default.  For example,
+<code>FILE</code> stream <code>unlocked</code> functions will be annotated, but
+those that perform implicit locking on <code>FILE</code> streams by default
+will not, even though the implicit locking may be disabled on a
+per-stream basis.
+</p>
+<p>In either case, we will not regard as MT-Unsafe functions that may
+access user-supplied objects in unsafe ways should users fail to ensure
+the accesses are well defined.  The notion prevails that users are
+expected to safeguard against data races any user-supplied objects that
+the library accesses on their behalf.
+</p>
+
+<p>This user responsibility does not apply, however, to objects controlled
+by the library itself, such as internal objects and static buffers used
+to return values from certain calls.  When the library doesn&rsquo;t guard
+them against concurrent uses, these cases are regarded as MT-Unsafe and
+AS-Unsafe (although the <code>race</code> mark under AS-Unsafe will be omitted
+as redundant with the one under MT-Unsafe).  As in the case of
+user-exposed objects, the mark may be followed by a colon and an
+identifier.  The identifier groups all functions that operate on a
+certain unguarded object; users may avoid the MT-Safety issues related
+with unguarded concurrent access to such internal objects by creating a
+non-recursive mutex related with the identifier, and always holding the
+mutex when calling any function marked as racy on that identifier, as
+they would have to should the identifier be an object under user
+control.  The non-recursive mutex avoids the MT-Safety issue, but it
+trades one AS-Safety issue for another, so use in asynchronous signals
+remains undefined.
+</p>
+<p>When the identifier relates to a static buffer used to hold return
+values, the mutex must be held for as long as the buffer remains in use
+by the caller.  Many functions that return pointers to static buffers
+offer reentrant variants that store return values in caller-supplied
+buffers instead.  In some cases, such as <code>tmpname</code>, the variant is
+chosen not by calling an alternate entry point, but by passing a
+non-<code>NULL</code> pointer to the buffer in which the returned values are
+to be stored.  These variants are generally preferable in multi-threaded
+programs, although some of them are not MT-Safe because of other
+internal buffers, also documented with <code>race</code> notes.
+</p>
+
+</li><li> <code>const</code>
+<a name="index-const"></a>
+
+<p>Functions marked with <code>const</code> as an MT-Safety issue non-atomically
+modify internal objects that are better regarded as constant, because a
+substantial portion of the GNU C Library accesses them without
+synchronization.  Unlike <code>race</code>, that causes both readers and
+writers of internal objects to be regarded as MT-Unsafe and AS-Unsafe,
+this mark is applied to writers only.  Writers remain equally MT- and
+AS-Unsafe to call, but the then-mandatory constness of objects they
+modify enables readers to be regarded as MT-Safe and AS-Safe (as long as
+no other reasons for them to be unsafe remain), since the lack of
+synchronization is not a problem when the objects are effectively
+constant.
+</p>
+<p>The identifier that follows the <code>const</code> mark will appear by itself
+as a safety note in readers.  Programs that wish to work around this
+safety issue, so as to call writers, may use a non-recursve
+<code>rwlock</code> associated with the identifier, and guard <em>all</em> calls
+to functions marked with <code>const</code> followed by the identifier with a
+write lock, and <em>all</em> calls to functions marked with the identifier
+by itself with a read lock.  The non-recursive locking removes the
+MT-Safety problem, but it trades one AS-Safety problem for another, so
+use in asynchronous signals remains undefined.
+</p>
+
+
+</li><li> <code>sig</code>
+<a name="index-sig"></a>
+
+<p>Functions marked with <code>sig</code> as a MT-Safety issue (that implies an
+identical AS-Safety issue, omitted for brevity) may temporarily install
+a signal handler for internal purposes, which may interfere with other
+uses of the signal, identified after a colon.
+</p>
+<p>This safety problem can be worked around by ensuring that no other uses
+of the signal will take place for the duration of the call.  Holding a
+non-recursive mutex while calling all functions that use the same
+temporary signal; blocking that signal before the call and resetting its
+handler afterwards is recommended.
+</p>
+<p>There is no safe way to guarantee the original signal handler is
+restored in case of asynchronous cancellation, therefore so-marked
+functions are also AC-Unsafe.
+</p>
+
+<p>Besides the measures recommended to work around the MT- and AS-Safety
+problem, in order to avert the cancellation problem, disabling
+asynchronous cancellation <em>and</em> installing a cleanup handler to
+restore the signal to the desired state and to release the mutex are
+recommended.
+</p>
+
+</li><li> <code>term</code>
+<a name="index-term"></a>
+
+<p>Functions marked with <code>term</code> as an MT-Safety issue may change the
+terminal settings in the recommended way, namely: call <code>tcgetattr</code>,
+modify some flags, and then call <code>tcsetattr</code>; this creates a window
+in which changes made by other threads are lost.  Thus, functions marked
+with <code>term</code> are MT-Unsafe.  The same window enables changes made by
+asynchronous signals to be lost.  These functions are also AS-Unsafe,
+but the corresponding mark is omitted as redundant.
+</p>
+<p>It is thus advisable for applications using the terminal to avoid
+concurrent and reentrant interactions with it, by not using it in signal
+handlers or blocking signals that might use it, and holding a lock while
+calling these functions and interacting with the terminal.  This lock
+should also be used for mutual exclusion with functions marked with
+<code>race:tcattr(fd)</code>, where <var>fd</var> is a file descriptor for
+the controlling terminal.  The caller may use a single mutex for
+simplicity, or use one mutex per terminal, even if referenced by
+different file descriptors.
+</p>
+<p>Functions marked with <code>term</code> as an AC-Safety issue are supposed to
+restore terminal settings to their original state, after temporarily
+changing them, but they may fail to do so if cancelled.
+</p>
+
+<p>Besides the measures recommended to work around the MT- and AS-Safety
+problem, in order to avert the cancellation problem, disabling
+asynchronous cancellation <em>and</em> installing a cleanup handler to
+restore the terminal settings to the original state and to release the
+mutex are recommended.
+</p>
+
+</li></ul>
+<h4 class="subsubsection">Other Safety Remarks</h4>
+<a name="index-Other-Safety-Remarks"></a>
+
+<p>Additional keywords may be attached to functions, indicating features
+that do not make a function unsafe to call, but that may need to be
+taken into account in certain classes of programs:
+</p>
+<ul>
+<li> <code>locale</code>
+<a name="index-locale"></a>
+
+<p>Functions annotated with <code>locale</code> as an MT-Safety issue read from
+the locale object without any form of synchronization.  Functions
+annotated with <code>locale</code> called concurrently with locale changes may
+behave in ways that do not correspond to any of the locales active
+during their execution, but an unpredictable mix thereof.
+</p>
+<p>We do not mark these functions as MT- or AS-Unsafe, however, because
+functions that modify the locale object are marked with
+<code>const:locale</code> and regarded as unsafe.  Being unsafe, the latter
+are not to be called when multiple threads are running or asynchronous
+signals are enabled, and so the locale can be considered effectively
+constant in these contexts, which makes the former safe.
+</p>
+
+
+</li><li> <code>env</code>
+<a name="index-env"></a>
+
+<p>Functions marked with <code>env</code> as an MT-Safety issue access the
+environment with <code>getenv</code> or similar, without any guards to ensure
+safety in the presence of concurrent modifications.
+</p>
+<p>We do not mark these functions as MT- or AS-Unsafe, however, because
+functions that modify the environment are all marked with
+<code>const:env</code> and regarded as unsafe.  Being unsafe, the latter are
+not to be called when multiple threads are running or asynchronous
+signals are enabled, and so the environment can be considered
+effectively constant in these contexts, which makes the former safe.
+</p>
+
+</li><li> <code>hostid</code>
+<a name="index-hostid"></a>
+
+<p>The function marked with <code>hostid</code> as an MT-Safety issue reads from
+the system-wide data structures that hold the &ldquo;host ID&rdquo; of the
+machine.  These data structures cannot generally be modified atomically.
+Since it is expected that the &ldquo;host ID&rdquo; will not normally change, the
+function that reads from it (<code>gethostid</code>) is regarded as safe,
+whereas the function that modifies it (<code>sethostid</code>) is marked with
+<code>const:hostid</code>, indicating it may require special
+care if it is to be called.  In this specific case, the special care
+amounts to system-wide (not merely intra-process) coordination.
+</p>
+
+</li><li> <code>sigintr</code>
+<a name="index-sigintr"></a>
+
+<p>Functions marked with <code>sigintr</code> as an MT-Safety issue access the
+<code>_sigintr</code> internal data structure without any guards to ensure
+safety in the presence of concurrent modifications.
+</p>
+<p>We do not mark these functions as MT- or AS-Unsafe, however, because
+functions that modify the this data structure are all marked with
+<code>const:sigintr</code> and regarded as unsafe.  Being unsafe, the latter
+are not to be called when multiple threads are running or asynchronous
+signals are enabled, and so the data structure can be considered
+effectively constant in these contexts, which makes the former safe.
+</p>
+
+</li><li> <code>fd</code>
+<a name="index-fd"></a>
+
+<p>Functions annotated with <code>fd</code> as an AC-Safety issue may leak file
+descriptors if asynchronous thread cancellation interrupts their
+execution.
+</p>
+<p>Functions that allocate or deallocate file descriptors will generally be
+marked as such.  Even if they attempted to protect the file descriptor
+allocation and deallocation with cleanup regions, allocating a new
+descriptor and storing its number where the cleanup region could release
+it cannot be performed as a single atomic operation.  Similarly,
+releasing the descriptor and taking it out of the data structure
+normally responsible for releasing it cannot be performed atomically.
+There will always be a window in which the descriptor cannot be released
+because it was not stored in the cleanup handler argument yet, or it was
+already taken out before releasing it.  It cannot be taken out after
+release: an open descriptor could mean either that the descriptor still
+has to be closed, or that it already did so but the descriptor was
+reallocated by another thread or signal handler.
+</p>
+<p>Such leaks could be internally avoided, with some performance penalty,
+by temporarily disabling asynchronous thread cancellation.  However,
+since callers of allocation or deallocation functions would have to do
+this themselves, to avoid the same sort of leak in their own layer, it
+makes more sense for the library to assume they are taking care of it
+than to impose a performance penalty that is redundant when the problem
+is solved in upper layers, and insufficient when it is not.
+</p>
+<p>This remark by itself does not cause a function to be regarded as
+AC-Unsafe.  However, cumulative effects of such leaks may pose a
+problem for some programs.  If this is the case, suspending asynchronous
+cancellation for the duration of calls to such functions is recommended.
+</p>
+
+</li><li> <code>mem</code>
+<a name="index-mem"></a>
+
+<p>Functions annotated with <code>mem</code> as an AC-Safety issue may leak
+memory if asynchronous thread cancellation interrupts their execution.
+</p>
+<p>The problem is similar to that of file descriptors: there is no atomic
+interface to allocate memory and store its address in the argument to a
+cleanup handler, or to release it and remove its address from that
+argument, without at least temporarily disabling asynchronous
+cancellation, which these functions do not do.
+</p>
+<p>This remark does not by itself cause a function to be regarded as
+generally AC-Unsafe.  However, cumulative effects of such leaks may be
+severe enough for some programs that disabling asynchronous cancellation
+for the duration of calls to such functions may be required.
+</p>
+
+</li><li> <code>cwd</code>
+<a name="index-cwd"></a>
+
+<p>Functions marked with <code>cwd</code> as an MT-Safety issue may temporarily
+change the current working directory during their execution, which may
+cause relative pathnames to be resolved in unexpected ways in other
+threads or within asynchronous signal or cancellation handlers.
+</p>
+<p>This is not enough of a reason to mark so-marked functions as MT- or
+AS-Unsafe, but when this behavior is optional (e.g., <code>nftw</code> with
+<code>FTW_CHDIR</code>), avoiding the option may be a good alternative to
+using full pathnames or file descriptor-relative (e.g. <code>openat</code>)
+system calls.
+</p>
+
+</li><li> <code>!posix</code>
+<a name="index-_0021posix"></a>
+
+<p>This remark, as an MT-, AS- or AC-Safety note to a function, indicates
+the safety status of the function is known to differ from the specified
+status in the POSIX standard.  For example, POSIX does not require a
+function to be Safe, but our implementation is, or vice-versa.
+</p>
+<p>For the time being, the absence of this remark does not imply the safety
+properties we documented are identical to those mandated by POSIX for
+the corresponding functions.
+</p>
+
+</li><li> <code>:identifier</code>
+<a name="index-_003aidentifier"></a>
+
+<p>Annotations may sometimes be followed by identifiers, intended to group
+several functions that e.g. access the data structures in an unsafe way,
+as in <code>race</code> and <code>const</code>, or to provide more specific
+information, such as naming a signal in a function marked with
+<code>sig</code>.  It is envisioned that it may be applied to <code>lock</code> and
+<code>corrupt</code> as well in the future.
+</p>
+<p>In most cases, the identifier will name a set of functions, but it may
+name global objects or function arguments, or identifiable properties or
+logical components associated with them, with a notation such as
+e.g. <code>:buf(arg)</code> to denote a buffer associated with the argument
+<var>arg</var>, or <code>:tcattr(fd)</code> to denote the terminal attributes of a
+file descriptor <var>fd</var>.
+</p>
+<p>The most common use for identifiers is to provide logical groups of
+functions and arguments that need to be protected by the same
+synchronization primitive in order to ensure safe operation in a given
+context.
+</p>
+
+</li><li> <code>/condition</code>
+<a name="index-_002fcondition"></a>
+
+<p>Some safety annotations may be conditional, in that they only apply if a
+boolean expression involving arguments, global variables or even the
+underlying kernel evaluates evaluates to true.  Such conditions as
+<code>/hurd</code> or <code>/!linux!bsd</code> indicate the preceding marker only
+applies when the underlying kernel is the HURD, or when it is neither
+Linux nor a BSD kernel, respectively.  <code>/!ps</code> and
+<code>/one_per_line</code> indicate the preceding marker only applies when
+argument <var>ps</var> is NULL, or global variable <var>one_per_line</var> is
+nonzero.
+</p>
+<p>When all marks that render a function unsafe are adorned with such
+conditions, and none of the named conditions hold, then the function can
+be regarded as safe.
+</p>
+
+</li></ul>
+
+
+<H3>Berkeley Unix</H3>
+
+<P>
+<P>GNU C библиотека определяет средства (которые формально не
+стандартизированы) из некоторых версий UNIX: 4.2 BSD, 4.3 BSD, и 4.4 BSD
+Unix системы (также известной как Berkeley Unix) и из SunOS (популярной
+4.2 BSD производной, которая включает некоторые функциональные
+возможности Unix System V ). Эта система поддерживает большинство ISO и
+POSIX средств, 4.4 BSD и более новые выпуски SunOS, т.е. фактически
+поддерживает их все.
+<P>BSD средства включают симлинки (см. раздел 14.5
+[Симлинки]), функцию select (см. раздел 13.8 [Ожидание ввода &shy;
+вывода]), функции сигнала BSD (см. раздел 24.9 [BSD Обработка сигнала]
+), и сокеты (см. Главу 16 [Сокеты]).
+<P>
+<H3>SVID (Описание интерфейса System V)</H3>
+
+<P>
+<P>Описание Интерфейса System V (SVID) - документ, описывающий AT&amp;T
+операционную систему Unix System V. Это -, в некоторой степени,
+надмножество стандарта POSIX (см. раздел 1.2.2 [POSIX])
+<P>GNU C библиотека определяет некоторые из средств, требуемые SVID, и
+не требуемые в соответствии c ISO или POSIX стандартами, для
+совместимости с Unix System V и другой UNIX системой (типа SunOS),
+которые включают эти средства. Однако, многие из большего количества
+менее известных и менее полезных средств, требуемых SVID не включены.
+(Фактически, Unix System V сама не обеспечивает их все.)
+<p>The supported facilities from System V include the methods for inter-process communication and shared memory, the hsearch and drand48 families of functions, fmtmsg and several of the mathematical functions. 
+<P>
+<h3 class="subsection">XPG (The X/Open Portability Guide)</h3>
+
+<p>The X/Open Portability Guide, published by the X/Open Company, Ltd., is
+a more general standard than POSIX.  X/Open owns the Unix copyright and
+the XPG specifies the requirements for systems which are intended to be
+a Unix system.
+</p>
+<p>The GNU C Library complies to the X/Open Portability Guide, Issue 4.2,
+with all extensions common to XSI (X/Open System Interface)
+compliant systems and also all X/Open UNIX extensions.
+</p>
+<p>The additions on top of POSIX are mainly derived from functionality
+available in System&nbsp;V<!-- /@w --> and BSD systems.  Some of the really bad
+mistakes in System&nbsp;V<!-- /@w --> systems were corrected, though.  Since
+fulfilling the XPG standard with the Unix extensions is a
+precondition for getting the Unix brand chances are good that the
+functionality is available on commercial systems.
+</p>
+
+<H2><A NAME="ss1.3">1.3 Использование библиотеки</A>
+</H2>
+
+<P>
+<P>Этот раздел описывает некоторые из практических проблем
+использования GNU C библиотеки.
+<P>
+<H3>Заголовочные файлы</H3>
+
+<P>
+<P>Библиотеки используемые С программами на самом деле состоят из двух
+частей: заголовочные файлы, которые определяют типы и макрокоманды и
+объявляют переменные и функции; и фактическая библиотека или архив,
+который содержит определения переменных и функций.
+<P>( В Cи, описание просто представляет информацию,что функция или
+переменная существует, и присваивает ей тип. Для объявления функции - информацию относительно типов параметров. 
+Цель объявлений состоит в том, чтобы транслятор правильно обработал ссылки к
+объявленным переменным и функциям. С другой стороны, определение
+фактически распределяет память для переменных или указывает, что делает
+функция.)
+<P>Чтобы использовать средства библиотеки GNU C, Вы должны убедиться,
+что ваши исходные программы включают соответствующие заголовочные файлы,
+чтобы транслятор видел объявления доступных средств, и мог правильно
+обрабатывать ссылки на них. При компиляции вашей программы, компоновщик
+свяжет эти ссылки с фактическими определениями, находящимися в файле
+архива.
+<P>Заголовочные Файлы включаются в исходный файл директивой препроцессора
+"#include". Язык С поддерживает две формы этой директивы; первая,
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+      #include "header"
+</PRE>
+</CODE></BLOCKQUOTE>
+
+обычно используется, чтобы включить заголовочный файл header, который Вы
+пишете самостоятельно; он обычно содержит определения и объявления,
+описывающие интерфейсы между различными частями вашей конкретной
+прграммы. Другая форма,
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+      #include &lt;file.h&gt;
+</PRE>
+</CODE></BLOCKQUOTE>
+
+обычно используется, чтобы включить заголовочный файл "file.h" который
+содержит определения и объявления для стандартной библиотеки. Этот файл
+обычно устанавливается в стандартное место вашим администратором
+системы. Вы должны использовать эту вторую форму для файлов заголовка
+библиотеки C.
+<P>Обычно, директивы "#include" помещены в начале исходного С файла,
+перед любым другим кодом. Если Вы начинаете ваши исходные файлы
+некоторыми комментариями, объясняя, что код в файле делает (a good idea), поместите
+директивы "#include" сразу после комментариев, согласно особенностям
+макроопределения (см. раздел 1.3.4 [Макрокоманды управления особенностями] ).
+<P>Для получения подробной информации относительно использования
+заголовочных и директивы "#include" см. раздел "Заголовочные файлы" в
+Руководстве по препроцессору GNU C.
+<P>GNU C библиотека обеспечивает несколько заголовочных файлов, каждый
+из которых содержит тип, макроопределения, переменную и описания функций
+для группы связанных средств. Это означает, что в ваши программы следует
+включить несколько заголовочных файлов, в зависимости от того, какие
+средства Вы используете.
+<P>Некоторые библиотечные заголовочные файлы включают другие
+библиотечные заголовочные файлы. Однако, программируя в хорошем стиле,
+Вы не должны полагаться на это; лучше явно включить все заголовочные
+файлы, требуемые для библиотечных средств, которые Вы используете. GNU C
+библиотека была написана таким способом, что не имеет значения, включен
+ли заголовочный файл случайно больше чем один раз; при включении
+заголовочного файла второй раз ничего не происходит. Аналогично, если
+ваша программа многократно включает заголовочные файлы, порядок
+включения, не имеет значения.
+<P>Примечание относительно совместимости: включение стандартного
+заголовочного файла в любом порядке и любое число раз работает в любой
+ISO C реализации. Однако, этого традиционно не было во многоих более
+старых C реализациях.
+<P>Строго говоря, Вы не должны включать заголовочный файл, чтобы
+использовать функцию, которую он объявляет; Вы можете объявить функцию
+явно, согласно спецификациям в этом руководстве. Но обычно лучше
+включить заголовочный файл, потому что он может определять типы и
+макрокоманды, которые иначе не доступны, или он может определять более
+эффективные макросы-замены для некоторых функций. Это - также верный
+способ иметь правильное объявление.
+<P>
+<P>
+<H3>Макроопределения функций</H3>
+
+<P>
+<P>Если мы в этом руководстве описываем что-нибудь как функцию, то она
+может иметь и макроопределение. Обычно это не имеет никакого значение для вашей программы,
+потому что макроопределение делает ту же самую вещь, что и функция.
+В частности, макро-эквиваленты для библиотечных функций вычисляют
+параметры ровно один раз, так же образом, как и при обращение к функции.
+Основная причина для этих макроопределений состоит в том, что иногда они
+могут реализовывать inline подстановку, которая выполняется значительно
+быстрее, чем фактическое обращение к функции.
+<P>Взятие адреса библиотечной функции работает даже, если она
+определена как макрокоманда, потому что, в этом контексте, имя функции
+не сопровождается левой круглой скобкой, которая является синтаксически
+необходимой, чтобы распознать макрообращение.
+<P>Вы можете иногда не использовать макроопределение функции,
+возможно, чтобы сделать вашу программу более простой для отладки.
+Имеются два способа, сделать это:
+<UL>
+<LI>       Вы можете избегать макроопределения, заключая имя функции в
+круглые скобки. Это работает, потому что имя функции не появляется в
+синтаксическом контексте, где оно распознаваемо как макрообращение.
+</LI>
+<LI>       Вы можете подавить любое макроопределение для целого исходного
+файла, используя директиву препроцессора "#undef ", если в явном описании
+средства не указано обратное.</LI>
+</UL>
+
+Например, предположим, что заголовочный файл "stdlib.h" объявляет
+функцию abs как
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+      extern int abs ( int);
+</PRE>
+</CODE></BLOCKQUOTE>
+
+и также обеспечивает макроопределение для abs. Тогда при выполнении:
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+      #include &lt; stdlib.h &gt;
+      int f ( int * i) {return (abs (++ * i));}
+</PRE>
+</CODE></BLOCKQUOTE>
+
+cсылка на abs может относиться или к макрокоманде или к функции. С другой
+стороны, в каждом из следующих примеров производится ссылка на функцию,
+а не на макрос.
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+      #include &lt; stdlib.h &gt;
+      int g ( int * i) {return ((abs) (++ * i));}
+      #undef abs
+      int h ( int *i) { return (abs (++*i)); }
+</PRE>
+</CODE></BLOCKQUOTE>
+
+Так как макроопределения, дублирующие функции, ведут себя в точно
+так же, как фактическая версия функции, there is usually no need for any of these methods. 
+In fact, удаление макроопределений, обычно,
+делает вашу программу медленнее.
+<P>
+<H3>Зарезервированные имена</H3>
+
+<P>
+<P>Имена всех библиотечных типов, макрокоманд, переменных и функций,
+которые исходят из ISO C стандарта, зарезервированы безоговорочно; ваша
+программа не имеет права переопределять эти имена. Все другие
+библиотечные имена зарезервированы, если ваша программа явно включает
+заголовочный файл, который определяет или объявляет их. Для этих
+ограничений имеются несколько причин:
+<UL>
+<LI>       Другие люди, читая ваш код могут запутаться, если Вы использовали
+функцию exit, чтобы делать что-нибудь полностью отличное от того, что
+делает стандартная функция выхода.
+
+Предотвращение этой ситуации помогает делать ваши программы более
+простыми, для понимания и способствует модульности и maintainability.
+</LI>
+<LI>       Это лишает пользователя возможности случайно переопределить
+библиотечную функцию, которая вызывается в соответствии c другими
+библиотечными функциями. Если переопределение позволялось, те другие
+функции не будут работать.
+</LI>
+<LI>       Это позволяет транслятору делать любые специальные оптимизации
+опираясь на обращения к этим функциям, без риска, что они могут быть
+переопределены пользователем. Некоторые библиотечные средства, такие как
+variadic функции (с переменным числом аргументов, см. раздел A.2
+[Variadic функции]) и нелокальные выходы (см. Главу 23 [Нелокальные
+выходы]), фактически требуют более близкого сотрудничества с частью C
+транслятора, and with respect to the implementation, для транслятора проще обрабатывать их как встроенные
+части языка.</LI>
+</UL>
+
+В дополнение к именам, описываемым в этом руководстве,
+зарезервированные имена включают в себя все внешние идентификаторы
+(глобальные функции и переменные) начинающиеся с подчеркивания ("_") и
+все идентификаторы независимо от использования, которые начинаются с
+двух подчеркиваний, или с подчеркивания, которое следует за заглавной
+буквой. Это для того, чтобы библиотека и заголовочные файлы могли
+определять функции, переменные, и макрокоманды для внутренних целей без
+риска конфликта с именами в программах пользователя.
+<P>Некоторые дополнительные классы имен идентификатора зарезервированы
+для будущих расширений языка С or the POSIX.1 environment. Использовании этих имен для ваших
+собственных целей прямо сейчас может не вызвать проблем, но они увеличивают возможность конфликта с будущими
+версиями стандарта C или POSIX, так что Вам следует избегать этих имен.
+<UL>
+<LI>       Имена, начинающиеся с прописной буквы "E" с последующей цифрой,
+или символом верхнего регистра могут использоваться для дополнительных
+имен кода ошибки. См. Главу 2 [Сообщения об ошибках].
+</LI>
+<LI>       Имена, которые начинаются с "is' или "к" сопровождаемые символом
+нижнего регистра, могут использоваться для дополнительного тестирования
+символа и функций преобразования. См. Главу 4 [Обработка символов].
+</LI>
+<LI>       Имена, которые начинаются с "LC_" с последующим символом верхнего
+регистра, могут использоваться для дополнительных макрокоманд, определяя
+атрибуты стандарта. См. Главу 7 [Локали].
+</LI>
+<LI>       Названия всех существующих функций математики (см. Главу 19
+[Математика]) с прибавленным "f" или "l" зарезервированы для
+соответствующих функций, которые применяют к числам с плавающей точкой и
+параметрам двойной длины, соответственно.
+</LI>
+<LI>       Имена, которые начинаются с "SIG", сопровождаемые символом
+верхнего регистра, зарезервированы для дополнительных имен сигнала. См.
+раздел 24.2 [Стандартные сигналы].
+</LI>
+<LI>       Имена, которые начинаются с "SIG_" сопровождаемые символом
+верхнего регистра, зарезервированы для дополнительных действий сигнала.
+См. раздел 24.3.1 [Базовая обработка сигналов].
+</LI>
+<LI>       Имена, начинающиеся со "str", "mem", или "wcs", сопровождаемые
+символом нижнего регистра, зарезервированы для дополнительной строки и
+функций массива. См. Главу 5 [Уилиты для работы со строками и
+массивами].
+</LI>
+<LI>       Имена, которые заканчиваются на "_t" зарезервированы для
+дополнительных имен типа.</LI>
+</UL>
+
+Кроме того, некоторые индивидуальные заголовочные файлы резервируют
+имена вне тех, что они фактически определяют. Если ваша программа
+включает такой специфический заголовочный файл, то у Вас есть повод для
+беспокойства.
+<UL>
+<LI>       Заголовочный файл "dirent.h" резервирует имена с предстоящим
+"d_".
+</LI>
+<LI>       Заголовочный файл "fcntl.h" резервирует имена с предстоящими
+"l_", "F_", "O_", и "S_".
+</LI>
+<LI>       Заголовочный файл "grp.h" резервирует имена с предстоящим "gr_".
+</LI>
+<LI>       Заголовочный файл "limits.h" резервирует имена, с приписанным
+"_MAX".
+</LI>
+<LI>       Заголовочный файл "pwd.h" резервирует имена с предстоящим "pw_".
+</LI>
+<LI>       Заголовочный файл "signal.h" резервирует имена с предстоящим
+"sa_" и "SA_".
+</LI>
+<LI>       Заголовочный файл "sys/stat.h" резервирует имена с предстоящим
+"st_" и "S_".
+</LI>
+<LI>       Заголовочный файл "sys/times.h" резервирует имена с предстоящим
+"tms_".
+</LI>
+<LI>       Заголовочный файл "termios.h" резервирует имена с предстоящим
+"c_", "V", "I", "O", и "TC", а также имена с предстоящим "B",
+сопровождаемым цифрой.</LI>
+</UL>
+<H3>Макрокоманды управления особенностями</H3>
+
+<P>
+<P>Управляя макрокомандами, Вы определяете точный набор особенностей,
+доступный при компиляции исходного файла.
+<P>Если Вы компилируете ваши программы, используя "gcc -ansi", Вы
+получаете только ISO C библиотечные возможности, если Вы явно не
+запрашиваете дополнительные возможности, определяя одну или большее
+количество макрокоманд особенностей. См. раздел "Опции Команд GNU CC" в
+GNU CC Руководстве, для уточнения информации относительно опций GCC.
+<P>Вы должны определить эти макрокоманды, используя директивы
+препроцессора "#define" в начале ваших файлов. Эти директивы должны
+стоять перед любым #include заголовочного файла системы. Лучше всего
+указывать их самыми первыми в файле, только после комментариев. Вы могли
+бы также использовать опцию `-D' для GCC, но лучше, если Вы создаете
+исходные файлы с указанием их собственного значения замкнутым способом.
+<p>This system exists to allow the library to conform to multiple standards. Although the different standards are often described as supersets of each other, they are usually incompatible because larger standards require functions with names that smaller ones reserve to the user program. This is not mere pedantry — it has been a problem in practice. For instance, some non-GNU programs define functions named getline that have nothing to do with this library’s getline. They would not be compilable if all features were enabled indiscriminately.
+<p>
+This should not be used to verify that a program conforms to a limited standard. It is insufficient for this purpose, as it will not protect you from including header files outside the standard, or relying on semantics undefined within the standard. 
+
+<DL>
+<DT><B>_POSIX_SOURCE (макрос) </B><DD><P>
+<P>Если Вы определяете эту макрокоманду, то функциональные возможности
+из стандарта POSIX.1 (Стандарт IEEE 1003.1) доступны, также как все
+ISO C средства.
+<P>The state of _POSIX_SOURCE is irrelevant if you define the macro _POSIX_C_SOURCE to a positive integer. 
+<p>
+<DT><B>_POSIX_C_SOURCE (макрос) </B><DD><P>
+<p>Define this macro to a positive integer to control which POSIX functionality is made available. The greater the value of this macro, the more functionality is made available. 
+<P>Если Вы определяете эту макрокоманду со значением 1, то будут
+определены функциональные возможности из стандарта POSIX.1 редакции 1990 года (Стандарт
+IEEE 1003.1-1990). 
+<p>Если Вы определяете эту макрокоманду со значением 2, то
+станут доступны <!--функциональные возможности из стандарта POSIX.1 и-->
+функциональные возможности из стандарта POSIX.2 редакции 1992 года (Стандарт IEEE 1003.2-1992).
+Это - в дополнение к ISO C средствам.
+<p>If you define this macro to a value greater than or equal to 199309L, then the functionality from the 1993 edition of the POSIX.1b standard (IEEE Standard 1003.1b-1993) is made available. 
+<p>Greater values for _POSIX_C_SOURCE will enable future extensions. The POSIX standards process will define these values as necessary, and the GNU C Library should support them some time after they become standardized. The 1996 edition of POSIX.1 (ISO/IEC 9945-1: 1996) states that if you define _POSIX_C_SOURCE to a value greater than or equal to 199506L, then the functionality from the 1996 edition is made available. 
+<P>
+<!--
+<DT><B>_BSD_SOURCE (макрос) </B><DD><P>
+<P>Если Вы определяете эту макрокоманду, включаются функциональные
+возможности 4.3 BSD Unix, также как ISO C, POSIX.1, и POSIX.2.
+<P>Некоторые из особенностей происходящие от 4.3 BSD Unix конфликтуют
+с соответствующими особенностями, определенными стандартом POSIX.1. Если
+эта макрокоманда определена, 4.3 BSD определения, имеют больший
+приоритет чем POSIX определения.
+<P>Из-за некоторых конфликтов между 4.3 BSD и POSIX.1, Вы должны
+использовать специальную BSD библиотеку совместимости при компоновании
+программ, компилируемых для BSD совместимости. Т. к. некоторые функции
+должны быть определены двумя различными способами, один из них в
+нормальной библиотеке C, а другой в библиотеке совместимости. Если ваша
+программа определяет _BSD_SOURCE, Вы должны указать опцию "-lbsd-compat"
+транслятору или компоновщику при компоновании программы, чтобы он нашел
+функции в этой специальной библиотеке совместимости перед поиском их в
+нормальной библиотеке C.
+<P>
+<DT><B>_SVID_SOURCE (макрос) </B><DD><P>
+<P>Если Вы определяете эту макрокоманду, функциональные возможности из
+SVID, включены также как ISO C, POSIX.1, и POSIX.2.
+<P>-->
+
+<DT><B></B><DD><P>
+<DT><B>Macro: _XOPEN_SOURCE</B><DD><P>
+<DT><B>Macro: _XOPEN_SOURCE_EXTENDED</B><DD><P>
+<P>
+    If you define this macro, functionality described in the X/Open Portability Guide is included. This is a superset of the POSIX.1 and POSIX.2 functionality and in fact _POSIX_SOURCE and _POSIX_C_SOURCE are automatically defined.
+<P>
+    As the unification of all Unices, functionality only available in BSD and SVID is also included.
+<P>
+    If the macro _XOPEN_SOURCE_EXTENDED is also defined, even more functionality is available. The extra functions will make all functions available which are necessary for the X/Open Unix brand.
+<P>
+    If the macro _XOPEN_SOURCE has the value 500 this includes all functionality described so far plus some new definitions from the Single Unix Specification, version 2. 
+<P>
+<DT><B>Macro: _LARGEFILE_SOURCE</B><DD><P>
+<P>
+    If this macro is defined some extra functions are available which rectify a few shortcomings in all previous standards. Specifically, the functions fseeko and ftello are available. Without these functions the difference between the ISO C interface (fseek, ftell) and the low-level POSIX interface (lseek) would lead to problems.
+<P>
+    This macro was introduced as part of the Large File Support extension (LFS). 
+<P>
+<DT><B>Macro: _LARGEFILE64_SOURCE</B><DD><P>
+<P>
+    If you define this macro an additional set of functions is made available which enables 32 bit systems to use files of sizes beyond the usual limit of 2GB. This interface is not available if the system does not support files that large. On systems where the natural file size limit is greater than 2GB (i.e., on 64 bit systems) the new functions are identical to the replaced functions.
+<P>
+    The new functionality is made available by a new set of types and functions which replace the existing ones. The names of these new objects contain 64 to indicate the intention, e.g., off_t vs. off64_t and fseeko vs. fseeko64.
+<P>
+    This macro was introduced as part of the Large File Support extension (LFS). It is a transition interface for the period when 64 bit offsets are not generally used (see _FILE_OFFSET_BITS). 
+<P>
+<DT><B>Macro: _FILE_OFFSET_BITS</B><DD><P>
+<P>
+    This macro determines which file system interface shall be used, one replacing the other. Whereas _LARGEFILE64_SOURCE makes the 64 bit interface available as an additional interface, _FILE_OFFSET_BITS allows the 64 bit interface to replace the old interface.
+<P>
+    If _FILE_OFFSET_BITS is undefined, or if it is defined to the value 32, nothing changes. The 32 bit interface is used and types like off_t have a size of 32 bits on 32 bit systems.
+<P>
+    If the macro is defined to the value 64, the large file interface replaces the old interface. I.e., the functions are not made available under different names (as they are with _LARGEFILE64_SOURCE). Instead the old function names now reference the new functions, e.g., a call to fseeko now indeed calls fseeko64.
+<P>
+    This macro should only be selected if the system provides mechanisms for handling large files. On 64 bit systems this macro has no effect since the *64 functions are identical to the normal functions.
+<P>
+    This macro was introduced as part of the Large File Support extension (LFS). 
+<P>
+<DT><B>Macro: _ISOC99_SOURCE</B><DD><P>
+<P>
+    Until the revised ISO C standard is widely adopted the new features are not automatically enabled. The GNU C Library nevertheless has a complete implementation of the new standard and to enable the new features the macro _ISOC99_SOURCE should be defined. 
+	<P>
+
+<DT><B>_GNU_SOURCE (макрос) </B><DD><P>
+<P>Если Вы определяете эту макрокоманду, включены все:  
+ISO C89, ISO C99, POSIX.1, POSIX.2, BSD, SVID, X/Open, LFS, и расширения GNU. В случаях, конфликтов
+POSIX.1 с BSD, POSIX определения берут верх.
+<!--
+<P>Если Вы хотите получить полный эффект _GNU_SOURCE, но установить
+BSD определениям больший приоритет необходимо примеенить следующую
+последовательность определений:
+<P>
+<P>
+<BLOCKQUOTE><CODE>
+<PRE>
+      #define _GNU_SOURCE
+      #define _BSD_SOURCE
+      #define _SVID_SOURCE
+</PRE>
+</CODE></BLOCKQUOTE>
+
+Обратите внимание, что, если Вы делаете это, Вы должны компоновать
+вашу программу с BSD библиотекой совместимости, указывая опцию `&shy;
+lbsd-compat' транслятору или компоновщику. Обратите внимание: если Вы
+забудете сделать это, Вы можете получить очень странные ошибки во время
+выполнения.
+<P>Мы рекомендуем, чтобы Вы использовали _GNU_SOURCE в новых
+программах. Если Вы не определяете опцию `-ansi' для GCC и не
+определяете никакую из этих макрокоманд явнно, то _GNU_SOURCE дает тот
+же эффект.
+-->
+
+<DT><B>Macro: _DEFAULT_SOURCE</B><DD><P>
+<P>
+    If you define this macro, most features are included apart from X/Open, LFS and GNU extensions: the effect is to enable features from the 2008 edition of POSIX, as well as certain BSD and SVID features without a separate feature test macro to control them. Defining this macro, on its own and without using compiler options such as -ansi or -std=c99, has the same effect as not defining any feature test macros; defining it together with other feature test macros, or when options such as -ansi are used, enables those features even when the other options would otherwise cause them to be disabled. 
+<P>
+<DT><B>Macro: _REENTRANT</B><DD><P>
+<DT><B>Macro: _THREAD_SAFE</B><DD><P>
+<P>
+    If you define one of these macros, reentrant versions of several functions get declared. Some of the functions are specified in POSIX.1c but many others are only available on a few other systems or are unique to the GNU C Library. The problem is the delay in the standardization of the thread safe C library interface.
+<P>
+    Unlike on some other systems, no special version of the C library must be used for linking. There is only one version but while compiling this it must have been specified to compile as thread safe. 
+	<P>
+</DL>
+<p>
+We recommend you use _GNU_SOURCE in new programs. If you don’t specify the ‘-ansi’ option to GCC, or other conformance options such as -std=c99, and don’t define any of these macros explicitly, the effect is the same as defining _DEFAULT_SOURCE to 1. 
+<p>
+Когда Вы определяете макрокоманду, чтобы запросить больший класс
+особенностей, безобидно определить кроме того макрокоманду для
+подмножества этих особенностей. Например, если Вы определяете _POSIX_
+C_SOURCE, то определение _POSIX_SOURCE не имеет никакого эффекта.
+Аналогично, если Вы определяете _GNU_SOURCE, определяя затем либо
+_POSIX_SOURCE либо _POSIX_C_SOURCE <!--либо _SVID_SOURCE-->, также не будет
+никакого эффекта.
+<!--
+<P>Обратите внимание, что особенности _BSD_SOURCE не подмножество
+любой другой из обеспечиваемых макрокоманд особенностей. Потому что эта
+макрокоманда определяет особенности BSD, которые берут верх над
+особенностями POSIX, которые запрашиваются другими макрокомандами. По
+этой причине, определение _BSD_SOURCE в дополнение к другим
+макрокомандам особенностей заставляет особенности BSD брать верх при
+конфликтое с особенностями POSIX .
+-->
+<P>
+<H2><A NAME="ss1.4">1.4 Путеводитель по руководству</A>
+</H2>
+
+<P>
+<P>Имеется краткий обзор содержания оставшихся глав этого руководства.
+<UL>
+<LI>       Глава 2 [Сообщения об ошибках], описывает, как сообщаются ошибки,
+обнаруженные библиотекой.
+</LI>
+<LI>       Глава 3 [Распределение памяти], описывает средства библиотеки GNU
+для динамического распределения and using virtual and real памяти. Если Вы не знаете заранее
+сколько памяти потребует ваша программа , Вы можете распределять память
+динамически, и управлять этим через указатели.
+</LI>
+<LI>       Глава 4 [Обработка символов], содержит информацию относительно
+символьных функций классификаций (типа isspace) и функций для выполнения
+преобразования по выбору.
+</LI>
+<LI>       Глава 5 [Утилиты для работы со строками и массивами], имеет
+описания функций для управления строками (символьными массивами,
+завершенными пустым указателем) и общими массивами байтов, включая
+операции типа копирования и сравнения.
+</LI>
+<!--
+<LI>       Глава 6 [Краткий обзор ввода - вывода], рассматривают средства
+ввода и вывода в библиотеке, и содержит информацию относительно базисных
+понятий, таких как имя файла.
+</LI>
+<LI>       Глава 7 [Потоки ввода - вывода], описывает операции ввода &shy;
+вывода, включая потоки (или FILE* объекты). Это обычные библиотечные
+функции C из "stdio.h".
+</LI>
+<LI>       Глава 8 [Ввод - вывод низкого уровня], содержит информацию
+относительно операций ввода - вывода с описателями файла. Описатели
+файла - механизм низшего уровня, специфический для UNIX семейства
+операционных систем.
+</LI>
+<LI>       Глава 9 [Интерфейс файловой системы], имеет описания операций на
+всех файлах, например функций для их удаления и переименования и для
+создания новых каталогов. Эта глава также содержит информацию,
+относительно того, как Вы можете обращаться к атрибутам файла, например
+к режимам защиты файла.
+</LI>
+<LI>       Глава 10 [Каналы и FIFO (первый зашел - первый вышел)], содержит
+информацию относительно простых межпроцессорных механизмов связи. Каналы
+обеспечивают связь между двумя связанными процессами (типа
+"родитель-порожденнным"), в то время как FIFO обеспечиваю связь между
+процессами, совместно используя общую файловую систему.
+</LI>
+<LI>       Глава 11 [Гнеза], описывает более сложный межпроцессорный
+механизм связи, который позволяет процессам, выполняющимся на различных
+машинах, связаться через сетью. Эта глава также содержит информацию
+относительно Межсетевой адресации главной ЭВМ и как использовать базы
+данных сетей системы.
+</LI>
+<LI>       Глава 12 [Интерфейс терминала низкого уровня], описывает, как Вы
+можете изменять атрибуты устройства терминала. Например, если Вы хотите
+отключать отображение символов, печатаемых пользователем, читайте эту
+главу.
+</LI>
+<LI>       Глава 13 [Математика], содержит информацию относительно
+математических библиотечных функций. Они включают такие вещи как
+генераторы случайных чисел и функции остатка, а также обычные
+тригонометрические и показательные функции на числах с плавающей
+запятой.
+</LI>
+<LI>       Глава 14 [Функции арифметики низкого уровня], описывают функции
+для простой арифметики, анализ чисел с плавающей запятой, и чтения чисел
+из строк.
+</LI>
+<LI>       Глава 15 [Поиск и сортировка], содержит информацию относительно
+функций для поиска и сортировки массивов. Вы можете использовать эти
+функции для любого вида массива, обеспечивая соответствующую функцию
+сравнения.
+</LI>
+<LI>       Глава 16 [Сопоставление с образцом], функции для определения
+соответствия регулярных выражений и образцов имени файла оболочки, и для
+расширяющихся слов, как делает оболочка.
+</LI>
+<LI>       Глава 17 [Дата и время], описывает функции для измерения
+календарного времени и процессорного времени, также как функции для
+установки будильников и таймеров.
+</LI>
+<LI>       Глава 18 [Расширения символов], содержит информацию относительно
+управления символами, и строками, используя набор символов больший чем,
+представлен в обычном типе данных char.
+</LI>
+<LI>       Глава 19 [Положение], описывает как выбор специфической страны
+или языка воздействует на поведение библиотеки. Например, эффекты
+положения воздействуют на последовательности объединений для строк и на
+то как форматируются валютные значки.
+</LI>
+<LI>       Глава 20 [Нелокальные выходы], содержит описания функций setjmp и
+longjmp. Эти функции обеспечивают средства для goto-подобных переходов,
+возможно из одной функции в другую.
+</LI>
+<LI>       Глава 21 [Обработка сигнала], сообщает Вам все относительно
+сигналов, что это такое, как установить драйвер, который вызывается,
+когда специфический вид сигнала поставлен, и как предотвратить сигналы
+во время выполнения критических разделов вашей программы.
+</LI>
+<LI>       Глава 22 [Запуск процесса], сообщает, как ваши программы могут
+обращаться к их параметрам командной строки и системным переменным.
+</LI>
+<LI>       Глава 23 [Порожденнные процессы], содержит информацию
+относительно того, как начать новые процессы и выполнять программы.
+</LI>
+<LI>       Глава 24 [Управление заданиями], описывает функции для управления
+группами процесса. Этот материал, вероятно, представляет интерес только,
+если Вы пишете оболочку.
+</LI>
+<LI>       Раздел 25.12 [База данных пользователей], и раздел 25.13 [База
+данных групп], сообщают Вам, как обратиться к базам данных групп и
+пользователей системы.
+</LI>
+<LI>       Глава 26 [Информация системы], описывает функции для получения
+информации относительно аппаратных средств и конфигурации программного
+обеспечения,когда выполняется ваша программа.
+</LI>
+<LI>       Глава 27 [Конфигурация системы], сообщает Вам, как Вы можете
+получить информацию относительно различных ограничений операционной
+системы. Большинство этих параметров предусмотрено для совместимости с
+POSIX.
+</LI>
+<LI>       Приложение A [Особенности языка], содержит информацию
+относительно библиотечной поддержки для стандартных частей C языка,
+включая такие вещи как оператор sizeof или символическая постоянная
+NULL, форма записи функций, принимающих переменное числа параметров, и
+констант, описывающих диапазоны и другие свойства числовых типов.
+Имеется также простой механизм отладки, который разрешает поместить
+утверждения в ваш код, и напечатать диагностические сообщения, если
+тесты не прошли.
+</LI>
+<LI>       Приложение B [Обзор библиотеки], дает обзор всех функций,
+переменных, и макрокоманд в библиотеке, с полными типами данных и
+функциональными прототипами, и говорит, от какого стандарта или системы
+каждая происходит.
+</LI>
+<LI>       Приложение C [Сопровождение], объясняет, как формировать и
+установить GNU C библиотеку на вашей системе, куда сообщать о всех
+ошибках, которые Вы можете найти, и как добавить новые функции или
+перенести библиотеку на новоую систему.</LI>
+</UL>
+-->
+Если Вы уже знаете имя средства, которое Вас интересует, Вы можете
+найти его в Приложении B [Обзор библиотеки]. Оно даст Вам обзор
+синтаксиса и указатель, по которому Вы можете найти более
+детализированное описание. Это приложение особенно полезно, если Вы
+хотите только проверить порядок и тип параметров функции, for example. Оно также
+сообщает Вам, от какого стандарта или системы происходит каждая функция,
+переменная, или макрокоманда.
+<P>
+<P>
+<P>
+<P>
+<P>
+<P>
+<P>
+<P>
+<P>
+<P>
+<P>
+<P>
+<P>
+<HR>
+<A HREF="glibc-2.html">Вперед</A>
+Назад
+<A HREF="glibc.html#toc1">Содержание</A>
+
+<!--htdig_noindex-->
+<noindex>
+<br>
+
+<table id=ibm_adv align=center><tr valign=top><td width="605">
+<iframe src="http://www.opennet.ru/adv_lc.html" height="240" width="605" scrolling="no" name="ibm" border="0" frameborder="0" target="_blank" marginheight="0" marginwidth="0"></iframe>
+</td></tr></table>
+</noindex>
+<!--/htdig_noindex-->
+
+
+<!-- footer -->
+<!--htdig_noindex-->
+<br>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=1 WIDTH="100%" BGCOLOR="#B0B190">
+<TR><TD>
+<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%" VALIGN="MIDDLE">
+<TR>
+<TD WIDTH="35%" BGCOLOR="#E9EAD6" ALIGN=LEFT>
+<FONT SIZE="-1">
+&nbsp;&nbsp;<A HREF="http://www.opennet.ru/cgi-bin/opennet/bookmark.cgi">Закладки&nbsp;на&nbsp;сайте</A><BR>
+&nbsp;&nbsp;<A HREF="http://www.opennet.ru/cgi-bin/opennet/bookmark.cgi?submit=add" target="blank_">Проследить&nbsp;за&nbsp;страницей</A>
+</FONT>
+</TD>
+<TD WIDTH="65%" ALIGN=RIGHT BGCOLOR="#E9EAD6">
+<FONT SIZE="-1">Created&nbsp;1996-2014&nbsp;by&nbsp;<B><A HREF="http://www.opennet.ru/contact.shtml" title="email mc@tyumen.ru">Maxim&nbsp;Chirkov</A></B></FONT>&nbsp;&nbsp;<BR>
+<FONT SIZE="-1"><A HREF="http://www.opennet.ru/add.shtml">Добавить</A>,&nbsp;<A HREF="http://www.opennet.ru/reklama.shtml">Реклама</A>,&nbsp;<A HREF="http://www.opennet.ru/banners2.shtml">Вебмастеру</A>,&nbsp;<A HREF="http://www.opennet.ru/guide.shtml">ГИД</A></FONT>&nbsp;&nbsp;
+</TD>
+</TR>
+</TABLE>
+</TD></TR>
+</TABLE>
+
+
+<div align=right><table><tr><td>
+<a target=_blank href="http://www.runnet.ru"><img src="http://www.opennet.ru/img/runnet.gif" border=0 height=31 width=88 alt="RUNNet"></a>
+<a target=_blank href="http://top.list.ru/jump?from=77689"><img src="http://top.list.ru/counter?id=77689;t=75;l=1" border=0 height=31 width=38 alt="TopList"></a>
+<script type="text/javascript"><!--
+document.write("<a href='http://www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t45.6;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet' "+
+"border='0' width='31' height='31'><\/a>")
+//--></script>
+<a target=_blank href="http://counter.rambler.ru/top100/"><img src="http://counter.rambler.ru/top100.cnt?10566" width=1 height=1 border=0><img src="http://www.opennet.ru/banner.gif" width=88 height=31 border=0></a>
+</td></tr></table>
+</div>
+</form>
+<!--/htdig_noindex-->
+<!-- end of footer -->
+
+</BODY>
+</HTML>
